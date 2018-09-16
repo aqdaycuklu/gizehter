@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aqbitig.gizehter.view;
 
 import aqbitig.controller.FileChooserInterface;
@@ -14,6 +9,7 @@ import java.awt.Toolkit;
 import java.io.File;
 
 /**
+ * gizehter = giz(li) + anahtar
  *
  * @author aqdaycuklu
  */

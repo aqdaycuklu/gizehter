@@ -1,6 +1,5 @@
 package aqbitig.gizehter.view;
 
-import aqbitig.controller.Interface;
 import aqbitig.controller.MyTreeModel;
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.io.FileManager;
@@ -8,6 +7,7 @@ import aqbitig.lib.T;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import aqbitig.controller.InterfaceTree;
 
 /**
  * gizehter = giz(li) + anahtar
@@ -16,7 +16,7 @@ import javax.swing.tree.TreePath;
  */
 public class Layout extends javax.swing.JFrame {
 
-    private final Interface iface;
+    private final InterfaceTree iface;
 
     /**
      * Creates new form NewJFrame
@@ -25,7 +25,7 @@ public class Layout extends javax.swing.JFrame {
 
         FileManager.backup("gizehter.db");
 
-        iface = new Interface() {
+        iface = new InterfaceTree() {
             @Override
             public void leafSelected() {
                 info1.claer();

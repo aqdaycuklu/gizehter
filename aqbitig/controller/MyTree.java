@@ -4,7 +4,6 @@ import aqbitig.gizehter.view.Main;
 import aqbitig.lib.T;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import javax.swing.DropMode;
 import javax.swing.JTree;
 import javax.swing.tree.TreeSelectionModel;
@@ -16,7 +15,7 @@ import javax.swing.tree.TreeSelectionModel;
  */
 public class MyTree extends JTree {
 
-    public MyTree(Interface iface) {
+    public MyTree(InterfaceTree iface) {
 
         MyTreeModel myTreeModel = new MyTreeModel();
         myTreeModel.addTreeModelListener(new MyTreeModelListener());

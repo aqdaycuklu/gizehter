@@ -3,7 +3,6 @@ package aqbitig.controller;
 import aqbitig.lib.T;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  * gizehter = giz(li) + anahtar

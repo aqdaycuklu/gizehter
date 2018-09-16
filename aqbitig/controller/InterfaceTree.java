@@ -5,7 +5,7 @@ package aqbitig.controller;
  *
  * @author aqdaycuklu
  */
-public interface Interface {
+public interface InterfaceTree {
 
     public void leafSelected();
 

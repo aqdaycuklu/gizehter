@@ -1,30 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aqbitig.gizehter.view;
 
-import aqbitig.controller.Interface;
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.lib.T;
-import java.io.File;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import aqbitig.controller.InterfaceTree;
 
 /**
+ * gizehter = giz(li) + anahtar
  *
  * @author aqdaycuklu
  */
 public class SplitPane extends javax.swing.JPanel {
 
-    private final Interface iface;
+    private final InterfaceTree iface;
 
-    /**
-     * Creates new form Layout2
-     */
     public SplitPane() {
         T.o("splitpane");
         iface = () -> {
