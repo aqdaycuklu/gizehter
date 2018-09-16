@@ -7,6 +7,7 @@ import aqbitig.lib.basic.T;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  * gizehter = giz(li) + anahtar
@@ -70,12 +71,13 @@ public class Main extends javax.swing.JFrame {
         jMenuItemAddLeaf = new javax.swing.JMenuItem();
         jMenuItemRemove = new javax.swing.JMenuItem();
         jMenuItemReload = new javax.swing.JMenuItem();
+        jMenuInfo = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(locationX, locationY);
         setMinimumSize(new java.awt.Dimension(800, 300));
         setSize(new java.awt.Dimension(800, 300));
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("\"O toprakta, Sen zindanda, Ben sürgün\"");
@@ -162,6 +164,14 @@ public class Main extends javax.swing.JFrame {
         jMenuTree.add(jMenuItemReload);
 
         jMenuBar1.add(jMenuTree);
+
+        jMenuInfo.setText("Info");
+        jMenuInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuInfoMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuInfo);
 
         setJMenuBar(jMenuBar1);
 
@@ -267,6 +277,11 @@ public class Main extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_jMenuItemCloseActionPerformed
 
+    private void jMenuInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuInfoMouseClicked
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "AqBitig 2018\nhttps://www.aqbitig.de");
+    }//GEN-LAST:event_jMenuInfoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -315,6 +330,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuInfo;
     private javax.swing.JMenuItem jMenuItemAddBranch;
     private javax.swing.JMenuItem jMenuItemAddLeaf;
     private javax.swing.JMenuItem jMenuItemClose;
@@ -325,7 +341,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemRemove;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenu jMenuTree;
-    private javax.swing.JSeparator jSeparatorFile;
+    private javax.swing.JPopupMenu.Separator jSeparatorFile;
     // End of variables declaration//GEN-END:variables
 
 }
