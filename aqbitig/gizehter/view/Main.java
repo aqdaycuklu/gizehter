@@ -187,6 +187,7 @@ public class Main extends javax.swing.JFrame {
             public void getFile(File f) {
                 file = f;
                 filePath = file.getPath();
+                aqbitig.lib.io.FileManager.backup(filePath);
                 mode = "open";
                 menu(true);
                 getContentPane().removeAll();
@@ -279,7 +280,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenuInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuInfoMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "AqBitig 2018\nhttps://www.aqbitig.de");
+        JOptionPane.showMessageDialog(null, "AqBitig 2018\nhttps://www.aqbitig.de\naqdaycuklu@aqbitig.de");
     }//GEN-LAST:event_jMenuInfoMouseClicked
 
     /**

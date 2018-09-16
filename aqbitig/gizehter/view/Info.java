@@ -27,7 +27,7 @@ public class Info extends javax.swing.JPanel {
 
     public void setNode(MyAtomic node) {
         this.node = node;
-        this.jTextFieldLogin.setText(node.login);
+        this.jTextFieldLogin.setText(C.decrypt(Main.password, node.login));
         this.jPasswordFieldPassword.setText(C.decrypt(Main.password, node.password));
         this.jTextFieldUrl.setText(node.getUrl());
         this.jTextPaneComment.setText(node.getComment());

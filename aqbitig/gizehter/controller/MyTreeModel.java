@@ -623,7 +623,7 @@ public class MyTreeModel implements TreeModel {
                         + " '" + child.getLevel() + "',"
                         + " '" + child.getParent().getIndex(child) + "',"
                         + " '" + getPath(child) + "',"
-                        + " '" + myAtomic.getLogin() + "',"
+                        + " '" + C.encrypt(Main.password, myAtomic.getLogin().toString()) + "',"
                         + " '" + C.encrypt(Main.password, myAtomic.getPassword().toString()) + "',"
                         + " '" + myAtomic.getUrl() + "',"
                         + " '" + myAtomic.getComment() + "'"
