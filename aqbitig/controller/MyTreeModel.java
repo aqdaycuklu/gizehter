@@ -1,8 +1,11 @@
 package aqbitig.controller;
 
 import aqbitig.gizehter.model.MyAtomic;
+import aqbitig.gizehter.view.Main;
+import aqbitig.lib.C;
 import aqbitig.lib.T;
 import aqbitig.lib.db.AqbSqlite;
+import java.io.File;
 import java.util.Enumeration;
 import java.util.List;
 import javax.swing.event.EventListenerList;
@@ -24,6 +27,7 @@ public class MyTreeModel implements TreeModel {
     protected DefaultMutableTreeNode root;
     protected EventListenerList listenerList = new EventListenerList();
     protected boolean asksAllowsChildren;
+    public File file;
 
     /* constructor */
     public MyTreeModel(DefaultMutableTreeNode root) {
@@ -63,6 +67,14 @@ public class MyTreeModel implements TreeModel {
     public boolean asksAllowsChildren() {
         T.o();
         return asksAllowsChildren;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
     /* class attributes. */
@@ -545,7 +557,7 @@ public class MyTreeModel implements TreeModel {
     }
 
     public void populateTree() {
-        List<MyAtomic> myAtomicSet = AqbSqlite.getAll();
+        List<MyAtomic> myAtomicSet = AqbSqlite.load();
         for (MyAtomic myAtomic : myAtomicSet) {
             T.o("\n");
             T.o("myAtomic.getpath() " + myAtomic.getPath());
@@ -613,7 +625,7 @@ public class MyTreeModel implements TreeModel {
                         + " '" + child.getParent().getIndex(child) + "',"
                         + " '" + getPath(child) + "',"
                         + " '" + myAtomic.getLogin() + "',"
-                        + " '" + myAtomic.getPassword() + "',"
+                        + " '" + C.encrypt(Main.password, myAtomic.getPassword().toString()) + "',"
                         + " '" + myAtomic.getUrl() + "',"
                         + " '" + myAtomic.getComment() + "'"
                         + ");";

@@ -6,6 +6,7 @@
 package aqbitig.gizehter.view;
 
 import aqbitig.gizehter.model.MyAtomic;
+import aqbitig.lib.C;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Info extends javax.swing.JPanel {
     public void setNode(MyAtomic node) {
         this.node = node;
         this.jTextFieldLogin.setText(node.login);
-        this.jPasswordFieldPassword.setText(node.password);
+        this.jPasswordFieldPassword.setText(C.decrypt(Main.password, node.password));
         this.jTextFieldUrl.setText(node.getUrl());
         this.jTextPaneComment.setText(node.getComment());
         this.jLabel1.setText(node.getPath());
@@ -73,7 +74,7 @@ public class Info extends javax.swing.JPanel {
         jButtonSave = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        jTextFieldLogin.setText("jTextField1");
+        jTextFieldLogin.setText("");
 
         jLabelLogin.setText("Login");
 
@@ -81,9 +82,9 @@ public class Info extends javax.swing.JPanel {
 
         jLabelUrl.setText("Url");
 
-        jTextFieldUrl.setText("jTextField3");
+        jTextFieldUrl.setText("");
 
-        jPasswordFieldPassword.setText("jPasswordField1");
+        jPasswordFieldPassword.setText("");
         jPasswordFieldPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jPasswordFieldPasswordFocusGained(evt);
@@ -102,7 +103,7 @@ public class Info extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

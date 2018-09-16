@@ -1,8 +1,10 @@
 package aqbitig.controller;
 
+import aqbitig.gizehter.view.Main;
 import aqbitig.lib.T;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import javax.swing.DropMode;
 import javax.swing.JTree;
 import javax.swing.tree.TreeSelectionModel;
@@ -15,12 +17,13 @@ import javax.swing.tree.TreeSelectionModel;
 public class MyTree extends JTree {
 
     public MyTree(Interface iface) {
-        super(new MyTreeModel());
 
-        MyTreeModel myTreeModel = (MyTreeModel) this.getModel();
+        MyTreeModel myTreeModel = new MyTreeModel();
         myTreeModel.addTreeModelListener(new MyTreeModelListener());
-        myTreeModel.populateTree();
-
+        if ("open".equalsIgnoreCase(Main.mode)) {
+            myTreeModel.populateTree();
+        }
+        this.setModel(myTreeModel);
         this.setDragEnabled(true);
         this.setDropMode(DropMode.ON_OR_INSERT);
         this.setTransferHandler(new MyTransferHandler());

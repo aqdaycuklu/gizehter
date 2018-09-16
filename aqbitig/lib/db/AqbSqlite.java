@@ -1,6 +1,8 @@
 package aqbitig.lib.db;
 
 import aqbitig.gizehter.model.MyAtomic;
+import aqbitig.gizehter.view.Main;
+import aqbitig.lib.C;
 import aqbitig.lib.T;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +31,11 @@ public class AqbSqlite {
 
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:gizehter.db");
+            if (!Main.file.exists() && "new".equalsIgnoreCase(Main.mode)) {
+                AqbSqlite.createDatabase();
+            }
+
+            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.filePath);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             int rs = statement.executeUpdate(sql);
@@ -58,7 +64,7 @@ public class AqbSqlite {
 
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:gizehter.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery(sql);
@@ -80,13 +86,13 @@ public class AqbSqlite {
         }
     }
 
-    public static List<MyAtomic> getAll() {
-        List<MyAtomic> myAtomicSet = new ArrayList<MyAtomic>();
+    public static List<MyAtomic> load() {
+        List<MyAtomic> myAtomicSet = new ArrayList<>();
         Connection connection = null;
         try {
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:gizehter.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery("select * from atomic");
@@ -121,6 +127,91 @@ public class AqbSqlite {
 
     public static void truncate() {
         insert("DELETE FROM `atomic`; UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='atomic';");
+    }
+
+    private static void createDatabase() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AqbSqlite.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+
+            String sql = "CREATE TABLE IF NOT EXISTS `atomic` ("
+                    + "	`id` INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "	`level` INTEGER NOT NULL,"
+                    + "	`index` INTEGER NOT NULL,"
+                    + "	`path` TEXT NOT NULL,"
+                    + "	`login` TEXT,"
+                    + "	`password` TEXT,"
+                    + "	`url` TEXT,"
+                    + "	`comment` TEXT"
+                    + ");";
+            System.out.println(statement.executeUpdate(sql));
+
+            sql = "CREATE TABLE IF NOT EXISTS `settings` ("
+                    + "	`id` INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "	`key` TEXT NOT NULL,"
+                    + "	`value` TEXT NOT NULL"
+                    + ");";
+
+            System.out.println(statement.executeUpdate(sql));
+
+            sql = "INSERT OR IGNORE INTO `settings`"
+                    + " (`key`, `value`)"
+                    + " VALUES"
+                    + "('password', '" + C.sha(Main.password) + "')";
+
+            System.out.println(statement.executeUpdate(sql));
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
+    public static boolean checkPassword(String password) {
+        Connection connection = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+
+            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);
+            ResultSet rs = statement.executeQuery("SELECT value FROM settings WHERE key = 'password';");
+
+            while (rs.next()) {
+                String secretKey = rs.getString("value");
+                T.o(secretKey);
+            }
+
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AqbSqlite.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+        return false;
     }
 
 }

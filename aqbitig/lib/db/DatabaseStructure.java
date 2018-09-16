@@ -30,6 +30,15 @@ public class DatabaseStructure {
                     + "	`comment` TEXT"
                     + ");";
             System.out.println(statement.executeUpdate(sql));
+
+            sql = "CREATE TABLE IF NOT EXISTS `settings` ("
+                    + "	`id` INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "	`key` TEXT NOT NULL,"
+                    + "	`value` TEXT NOT NULL"
+                    + ");";
+
+            System.out.println(statement.executeUpdate(sql));
+
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         } finally {
