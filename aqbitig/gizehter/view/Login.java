@@ -36,7 +36,6 @@ public class Login extends javax.swing.JPanel {
         jButtonPassword = new javax.swing.JButton();
         jPasswordField2 = new javax.swing.JPasswordField();
 
-        jPasswordField1.setText("jPasswordField1");
         jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jPasswordField1FocusLost(evt);
@@ -55,7 +54,6 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
-        jPasswordField2.setText("jPasswordField1");
         jPasswordField2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jPasswordField2FocusLost(evt);
