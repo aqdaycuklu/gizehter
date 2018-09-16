@@ -1,12 +1,12 @@
 package aqbitig.gizehter.view;
 
 import aqbitig.gizehter.model.MyAtomic;
-import aqbitig.lib.T;
+import aqbitig.lib.basic.T;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import aqbitig.controller.InterfaceTree;
+import aqbitig.gizehter.controller.InterfaceTree;
 
 /**
  * gizehter = giz(li) + anahtar
@@ -56,7 +56,7 @@ public class SplitPane extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         info = new aqbitig.gizehter.view.Info();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree = new aqbitig.controller.MyTree(iface);
+        jTree = new aqbitig.gizehter.controller.MyTree(iface);
 
         jSplitPane1.setDividerLocation(395);
         jSplitPane1.setDividerSize(10);

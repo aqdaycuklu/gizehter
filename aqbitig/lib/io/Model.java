@@ -1,4 +1,4 @@
-package aqbitig.io;
+package aqbitig.lib.io;
 
 import java.io.Serializable;
 

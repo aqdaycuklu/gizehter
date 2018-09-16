@@ -1,15 +1,15 @@
-package aqbitig;
+package aqbitig.gizehter;
 
-import aqbitig.gizehter.view.Layout;
+
 
 /**
  * gizehter = giz(li) + anahtar
  *
  * @author aqdaycuklu
  */
-public class Main {
+public class Start {
 
     public static void main(String[] args) {
-        Layout.main(null);
+        aqbitig.gizehter.view.Main.main(null);
     }
 }

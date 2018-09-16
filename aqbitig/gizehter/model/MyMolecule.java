@@ -1,6 +1,6 @@
 package aqbitig.gizehter.model;
 
-import aqbitig.lib.T;
+import aqbitig.lib.basic.T;
 
 /**
  * gizehter = giz(li) + anahtar

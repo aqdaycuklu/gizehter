@@ -1,6 +1,6 @@
-package aqbitig.controller;
+package aqbitig.gizehter.controller;
 
-import aqbitig.lib.T;
+import aqbitig.lib.basic.T;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;

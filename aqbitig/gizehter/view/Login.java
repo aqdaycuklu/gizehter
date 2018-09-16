@@ -1,6 +1,6 @@
 package aqbitig.gizehter.view;
 
-import aqbitig.controller.InterfaceLogin;
+import aqbitig.gizehter.controller.InterfaceLogin;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 

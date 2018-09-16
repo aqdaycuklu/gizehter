@@ -1,9 +1,9 @@
-package aqbitig.controller;
+package aqbitig.gizehter.controller;
 
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.gizehter.view.Main;
-import aqbitig.lib.C;
-import aqbitig.lib.T;
+import aqbitig.lib.basic.C;
+import aqbitig.lib.basic.T;
 import aqbitig.lib.db.AqbSqlite;
 import java.io.File;
 import java.util.List;

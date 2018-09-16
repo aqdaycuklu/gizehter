@@ -1,7 +1,7 @@
-package aqbitig.controller;
+package aqbitig.gizehter.controller;
 
 import aqbitig.gizehter.view.Main;
-import aqbitig.lib.T;
+import aqbitig.lib.basic.T;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DropMode;

@@ -1,6 +1,6 @@
-package aqbitig.controller;
+package aqbitig.gizehter.controller;
 
-import aqbitig.lib.T;
+import aqbitig.lib.basic.T;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 

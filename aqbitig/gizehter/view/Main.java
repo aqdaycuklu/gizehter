@@ -1,9 +1,9 @@
 package aqbitig.gizehter.view;
 
-import aqbitig.controller.FileChooserInterface;
-import aqbitig.controller.InterfaceLogin;
-import aqbitig.controller.MyTreeModel;
-import aqbitig.lib.T;
+import aqbitig.gizehter.controller.FileChooserInterface;
+import aqbitig.gizehter.controller.InterfaceLogin;
+import aqbitig.gizehter.controller.MyTreeModel;
+import aqbitig.lib.basic.T;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -16,8 +16,7 @@ import java.io.File;
 public class Main extends javax.swing.JFrame {
 
     /* MY PROPERTIES */
-    aqbitig.controller.InterfaceLogin loginInterface;
-    private aqbitig.gizehter.view.Layout layout;
+    aqbitig.gizehter.controller.InterfaceLogin loginInterface;
 
     public static java.io.File file;
     public static String filePath;

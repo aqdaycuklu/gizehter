@@ -1,4 +1,4 @@
-package aqbitig.lib;
+package aqbitig.lib.basic;
 
 /**
  * gizehter = giz(li) + anahtar

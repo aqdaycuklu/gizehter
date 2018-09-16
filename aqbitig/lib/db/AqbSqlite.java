@@ -2,8 +2,8 @@ package aqbitig.lib.db;
 
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.gizehter.view.Main;
-import aqbitig.lib.C;
-import aqbitig.lib.T;
+import aqbitig.lib.basic.C;
+import aqbitig.lib.basic.T;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

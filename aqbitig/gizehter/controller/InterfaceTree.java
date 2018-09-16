@@ -1,4 +1,4 @@
-package aqbitig.controller;
+package aqbitig.gizehter.controller;
 
 /**
  * gizehter = giz(li) + anahtar

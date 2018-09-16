@@ -1,7 +1,7 @@
 package aqbitig.gizehter.view;
 
 import aqbitig.gizehter.model.MyAtomic;
-import aqbitig.lib.C;
+import aqbitig.lib.basic.C;
 
 /**
  * gizehter = giz(li) + anahtar

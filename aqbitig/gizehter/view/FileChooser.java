@@ -1,7 +1,7 @@
 package aqbitig.gizehter.view;
 
-import aqbitig.controller.FileChooserInterface;
-import aqbitig.lib.T;
+import aqbitig.gizehter.controller.FileChooserInterface;
+import aqbitig.lib.basic.T;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
