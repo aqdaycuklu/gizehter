@@ -20,7 +20,7 @@ public class SplitPane extends javax.swing.JPanel {
     public SplitPane() {
         T.o("splitpane");
         iface = () -> {
-            info.claer();
+            info.clear();
             info.deactivate();
 
             TreePath path = jTree.getSelectionPath();

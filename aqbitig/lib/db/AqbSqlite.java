@@ -31,9 +31,6 @@ public class AqbSqlite {
 
         Connection connection = null;
         try {
-            if (!Main.file.exists() && "new".equalsIgnoreCase(Main.mode)) {
-                AqbSqlite.createDatabase();
-            }
 
             connection = DriverManager.getConnection("jdbc:sqlite:" + Main.filePath);
             Statement statement = connection.createStatement();
@@ -100,8 +97,8 @@ public class AqbSqlite {
             while (rs.next()) {
                 MyAtomic myAtomic = new MyAtomic(
                         rs.getString("path"),
-                        rs.getString("login"),
-                        rs.getString("password"),
+                        C.decrypt(Main.password, rs.getString("login")),
+                        C.decrypt(Main.password, rs.getString("password")),
                         rs.getString("url"),
                         rs.getString("comment")
                 );
@@ -184,20 +181,30 @@ public class AqbSqlite {
 
     public static boolean checkPassword(String password) {
         Connection connection = null;
+
         try {
+
+            password = C.sha(password);
+
             Class.forName("org.sqlite.JDBC");
 
             connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
-            ResultSet rs = statement.executeQuery("SELECT value FROM settings WHERE key = 'password';");
-
+            String sql = "SELECT `value` FROM `settings` WHERE `key` = 'password' AND `value` = '" + password + "';";
+            T.o("sql: " + sql);
+            ResultSet rs = statement.executeQuery(sql);
+            T.o(rs);
+            boolean ret = false;
             while (rs.next()) {
                 String secretKey = rs.getString("value");
-                T.o(secretKey);
+                T.o("sql: " + sql + " | sk: " + secretKey + " | password: " + password);
+                if (secretKey.equals(password)) {
+                    ret = true;
+                }
             }
 
-            return true;
+            return ret;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -210,6 +217,14 @@ public class AqbSqlite {
             } catch (SQLException e) {
                 System.err.println(e);
             }
+        }
+        return false;
+    }
+
+    public static boolean setPassword(String password) {
+        if (!Main.file.exists() && "new".equals(Main.mode)) {
+            AqbSqlite.createDatabase();
+            return checkPassword(password);
         }
         return false;
     }

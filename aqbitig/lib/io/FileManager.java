@@ -74,14 +74,14 @@ public class FileManager {
 
     public static void backup(String fileName) {
         try {
-            if (!new File("backup_1." + fileName).exists()
-                    || !FileManager.isFileBinaryEqual(new File(fileName), new File("backup_1." + fileName))) {
+            if (!new File(fileName + ".backup_1").exists()
+                    || !FileManager.isFileBinaryEqual(new File(fileName), new File(fileName + ".backup_1"))) {
                 T.o("Files not equal");
 
                 // BACKUP DB
                 for (int i = 4; i > 0; i--) {
-                    String oldF = "backup_" + i + "." + fileName;
-                    String newF = "backup_" + (i + 1) + "." + fileName;
+                    String oldF = fileName + ".backup_" + i;
+                    String newF = fileName + ".backup_" + (i + 1);
                     File f = new File(oldF);
                     if (f.exists()) {
                         Files.copy(Paths.get(oldF), Paths.get(newF), REPLACE_EXISTING);
@@ -89,7 +89,7 @@ public class FileManager {
                 }
 
                 Path source = Paths.get(fileName);
-                Path target = Paths.get("backup_1." + fileName);
+                Path target = Paths.get(fileName + ".backup_1");
                 Files.copy(source, target, REPLACE_EXISTING);
             } else {
                 T.o("Files equal");

@@ -71,6 +71,8 @@ public class Main extends javax.swing.JFrame {
         jMenuItemAddLeaf = new javax.swing.JMenuItem();
         jMenuItemRemove = new javax.swing.JMenuItem();
         jMenuItemReload = new javax.swing.JMenuItem();
+        jSeparatorTree = new javax.swing.JPopupMenu.Separator();
+        jMenuItemClear = new javax.swing.JMenuItem();
         jMenuInfo = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -162,6 +164,15 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenuTree.add(jMenuItemReload);
+        jMenuTree.add(jSeparatorTree);
+
+        jMenuItemClear.setText("Clear");
+        jMenuItemClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemClearActionPerformed(evt);
+            }
+        });
+        jMenuTree.add(jMenuItemClear);
 
         jMenuBar1.add(jMenuTree);
 
@@ -197,10 +208,14 @@ public class Main extends javax.swing.JFrame {
                         T.o(password);
                         T.o(new String(password));
                         Main.password = new String(password);
-                        getContentPane().removeAll();
-                        getContentPane().add(splitPane);
-                        ((MyTreeModel) splitPane.getjTree().getModel()).populateTree();
-                        pack();
+                        if (!aqbitig.lib.db.AqbSqlite.checkPassword(Main.password)) {
+                            JOptionPane.showMessageDialog(null, "Password not correct.");
+                        } else {
+                            getContentPane().removeAll();
+                            getContentPane().add(splitPane);
+                            ((MyTreeModel) splitPane.getjTree().getModel()).populateTree();
+                            pack();
+                        }
                     }
                 }));
                 pack();
@@ -227,9 +242,13 @@ public class Main extends javax.swing.JFrame {
                         T.o(password);
                         T.o(new String(password));
                         Main.password = new String(password);
-                        getContentPane().removeAll();
-                        getContentPane().add(splitPane);
-                        pack();
+                        if (!aqbitig.lib.db.AqbSqlite.setPassword(Main.password)) {
+                            JOptionPane.showMessageDialog(null, "Password not saved.");
+                        } else {
+                            getContentPane().removeAll();
+                            getContentPane().add(splitPane);
+                            pack();
+                        }
                     }
                 }));
                 pack();
@@ -272,6 +291,7 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItemCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCloseActionPerformed
         // TODO add your handling code here:
         ((MyTreeModel) splitPane.getjTree().getModel()).clear();
+        ((Info) splitPane.getInfo()).clear();
         getContentPane().removeAll();
         getContentPane().add(jLabel1);
         menu(false);
@@ -282,6 +302,11 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "AqBitig 2018\nhttps://www.aqbitig.de\naqdaycuklu@aqbitig.de");
     }//GEN-LAST:event_jMenuInfoMouseClicked
+
+    private void jMenuItemClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearActionPerformed
+        // TODO add your handling code here:
+        ((MyTreeModel) splitPane.getjTree().getModel()).clear();
+    }//GEN-LAST:event_jMenuItemClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,6 +359,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuInfo;
     private javax.swing.JMenuItem jMenuItemAddBranch;
     private javax.swing.JMenuItem jMenuItemAddLeaf;
+    private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemExit;
     private javax.swing.JMenuItem jMenuItemNew;
@@ -343,6 +369,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JMenu jMenuTree;
     private javax.swing.JPopupMenu.Separator jSeparatorFile;
+    private javax.swing.JPopupMenu.Separator jSeparatorTree;
     // End of variables declaration//GEN-END:variables
 
 }

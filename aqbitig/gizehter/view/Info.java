@@ -27,14 +27,14 @@ public class Info extends javax.swing.JPanel {
 
     public void setNode(MyAtomic node) {
         this.node = node;
-        this.jTextFieldLogin.setText(C.decrypt(Main.password, node.login));
-        this.jPasswordFieldPassword.setText(C.decrypt(Main.password, node.password));
+        this.jTextFieldLogin.setText(node.login);
+        this.jPasswordFieldPassword.setText(node.password);
         this.jTextFieldUrl.setText(node.getUrl());
         this.jTextPaneComment.setText(node.getComment());
         this.jLabel1.setText(node.getPath());
     }
 
-    public void claer() {
+    public void clear() {
         this.jTextFieldLogin.setText("");
         this.jPasswordFieldPassword.setText("");
         this.jTextFieldUrl.setText("");
