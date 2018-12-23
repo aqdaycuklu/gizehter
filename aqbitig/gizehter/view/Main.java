@@ -74,6 +74,8 @@ public class Main extends javax.swing.JFrame {
         jSeparatorTree = new javax.swing.JPopupMenu.Separator();
         jMenuItemClear = new javax.swing.JMenuItem();
         jMenuInfo = new javax.swing.JMenu();
+        jMenuItemAbout = new javax.swing.JMenuItem();
+        jMenuItemLicenses = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(locationX, locationY);
@@ -177,11 +179,23 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1.add(jMenuTree);
 
         jMenuInfo.setText("Info");
-        jMenuInfo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuInfoMouseClicked(evt);
+
+        jMenuItemAbout.setText("About");
+        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutActionPerformed(evt);
             }
         });
+        jMenuInfo.add(jMenuItemAbout);
+
+        jMenuItemLicenses.setText("Licenses");
+        jMenuItemLicenses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLicensesActionPerformed(evt);
+            }
+        });
+        jMenuInfo.add(jMenuItemLicenses);
+
         jMenuBar1.add(jMenuInfo);
 
         setJMenuBar(jMenuBar1);
@@ -298,15 +312,22 @@ public class Main extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_jMenuItemCloseActionPerformed
 
-    private void jMenuInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuInfoMouseClicked
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "AqBitig 2018\nhttps://www.aqbitig.de\naqdaycuklu@aqbitig.de");
-    }//GEN-LAST:event_jMenuInfoMouseClicked
-
     private void jMenuItemClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClearActionPerformed
         // TODO add your handling code here:
         ((MyTreeModel) splitPane.getjTree().getModel()).clear();
     }//GEN-LAST:event_jMenuItemClearActionPerformed
+
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "AqBitig 2018\nhttps://www.aqbitig.de\naqdaycuklu@aqbitig.de");
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
+
+    private void jMenuItemLicensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLicensesActionPerformed
+        // TODO add your handling code here:
+        String licenses = "Used third party libs/software:\n\nSQLite JDBC\nhttps://bitbucket.org/xerial/sqlite-jdbc/";
+        JOptionPane.showMessageDialog(null, licenses);
+
+    }//GEN-LAST:event_jMenuItemLicensesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,11 +378,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuInfo;
+    private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddBranch;
     private javax.swing.JMenuItem jMenuItemAddLeaf;
     private javax.swing.JMenuItem jMenuItemClear;
     private javax.swing.JMenuItem jMenuItemClose;
     private javax.swing.JMenuItem jMenuItemExit;
+    private javax.swing.JMenuItem jMenuItemLicenses;
     private javax.swing.JMenuItem jMenuItemNew;
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenuItem jMenuItemReload;
