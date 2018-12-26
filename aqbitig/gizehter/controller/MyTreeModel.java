@@ -112,10 +112,18 @@ public class MyTreeModel implements TreeModel {
 
     @Override
     public void valueForPathChanged(TreePath path, Object newValue) {
-        T.o();
+        T.o(true);
         T.o(path);
         T.o(newValue);
+        T.o();
+
         DefaultMutableTreeNode aNode = (DefaultMutableTreeNode) path.getLastPathComponent();
+        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) aNode.getParent();
+
+        if (!canRename(parent, newValue.toString())) {
+            return;
+        }
+
         if (aNode.getAllowsChildren()) {
             aNode.setUserObject(newValue);
         } else {
@@ -124,6 +132,17 @@ public class MyTreeModel implements TreeModel {
             aNode.setUserObject(myAtomic);
         }
 
+    }
+
+    private boolean canRename(DefaultMutableTreeNode parent, String childName) {
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            DefaultMutableTreeNode child = (DefaultMutableTreeNode) parent.getChildAt(i);
+            if (child.toString().equalsIgnoreCase(childName)) {
+                T.o("node already exists!");
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -625,8 +644,8 @@ public class MyTreeModel implements TreeModel {
                         + " '" + getPath(child) + "',"
                         + " '" + C.encrypt(Main.password, myAtomic.getLogin().toString()) + "',"
                         + " '" + C.encrypt(Main.password, myAtomic.getPassword().toString()) + "',"
-                        + " '" + myAtomic.getUrl() + "',"
-                        + " '" + myAtomic.getComment() + "'"
+                        + " '" + C.encrypt(Main.password, myAtomic.getUrl().toString()) + "',"
+                        + " '" + C.encrypt(Main.password, myAtomic.getComment().toString()) + "'"
                         + ");";
                 T.o("sql: " + sql);
                 AqbSqlite.insert(sql);

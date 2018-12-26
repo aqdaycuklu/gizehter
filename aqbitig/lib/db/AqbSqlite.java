@@ -99,8 +99,8 @@ public class AqbSqlite {
                         rs.getString("path"),
                         C.decrypt(Main.password, rs.getString("login")),
                         C.decrypt(Main.password, rs.getString("password")),
-                        rs.getString("url"),
-                        rs.getString("comment")
+                        C.decrypt(Main.password, rs.getString("url")),
+                        C.decrypt(Main.password, rs.getString("comment"))
                 );
                 myAtomicSet.add(myAtomic);
             }
