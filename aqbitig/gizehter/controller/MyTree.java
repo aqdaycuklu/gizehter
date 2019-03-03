@@ -1,5 +1,11 @@
 package aqbitig.gizehter.controller;
 
+import aqbitig.lib.basic.T;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+
 /**
  * gizehter = giz(li) + anahtar
  *
@@ -7,31 +13,24 @@ package aqbitig.gizehter.controller;
  */
 public class MyTree extends javax.swing.JTree {
 
-    public MyTree(InterfaceTree iface) {
+    /**
+     *
+     * @param abstractTree
+     */
+    public MyTree() {
 
-        MyTreeModel myTreeModel = new MyTreeModel();
-        myTreeModel.addTreeModelListener(new MyTreeModelListener());
-        if ("open".equalsIgnoreCase(aqbitig.gizehter.view.Main.mode)) {
-            myTreeModel.populateTree();
-        }
-        this.setModel(myTreeModel);
+        // if ("open".equalsIgnoreCase(aqbitig.gizehter.view.Main.mode)) {
+        //     myTreeModel.populateTree();
+        // }
+
+        // TREE
         this.setDragEnabled(true);
         this.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
-        this.setTransferHandler(new MyTransferHandler());
         this.setEditable(true);
         this.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         this.setShowsRootHandles(true);
+        this.setTransferHandler(new MyTransferHandler());
 
-        this.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent e) {
-                if (e.isPopupTrigger()) {
-                    aqbitig.gizehter.view.PopupMenu popupMenu = new aqbitig.gizehter.view.PopupMenu((javax.swing.JTree) e.getComponent(), e.getX(), e.getY());
-                } else {
-                    iface.leafSelected();
-                }
-            }
-        });
     }
 
 }

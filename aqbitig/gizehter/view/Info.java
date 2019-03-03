@@ -12,11 +12,16 @@ public class Info extends javax.swing.JPanel {
 
     MyAtomic node;
     char passwordChar;
+    
+    aqbitig.gizehter.controller.InterfaceInfo interfaceInfo;
+    
 
     /**
      * Creates new form input
+     * @param interfaceInfo
      */
-    public Info() {
+    public Info(aqbitig.gizehter.controller.InterfaceInfo interfaceInfo) {
+        this.interfaceInfo = interfaceInfo;
         initComponents();
         this.passwordChar = jPasswordFieldPassword.getEchoChar();
     }
@@ -144,8 +149,8 @@ public class Info extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -159,6 +164,8 @@ public class Info extends javax.swing.JPanel {
         node.setPassword(jPasswordFieldPassword.getText());
         node.setUrl(jTextFieldUrl.getText());
         node.setComment(jTextPaneComment.getText());
+        
+        interfaceInfo.save();
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jPasswordFieldPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordFocusGained

@@ -26,14 +26,16 @@ public class MyTreeModel implements TreeModel {
     protected DefaultMutableTreeNode root;
     protected EventListenerList listenerList = new EventListenerList();
     protected boolean asksAllowsChildren;
-    public File file;
+    
+    private aqbitig.lib.db.AqbSqlite aqbSqlite;
 
     /* constructor */
     public MyTreeModel(DefaultMutableTreeNode root) {
         this(root, false);
     }
 
-    public MyTreeModel() {
+    public MyTreeModel(aqbitig.lib.db.AqbSqlite aqbSqlite) {
+        this.aqbSqlite = aqbSqlite;
         this.root = new DefaultMutableTreeNode("root");
     }
 
@@ -66,14 +68,6 @@ public class MyTreeModel implements TreeModel {
     public boolean asksAllowsChildren() {
         T.o();
         return asksAllowsChildren;
-    }
-
-    public File getFile() {
-        return file;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
     }
 
     /* class attributes. */
@@ -343,8 +337,7 @@ public class MyTreeModel implements TreeModel {
     }
 
     //----------
-    public void insertNodeInto(MutableTreeNode newChild,
-            MutableTreeNode parent, int index) {
+    public void insertNodeInto(MutableTreeNode newChild, MutableTreeNode parent, int index) {
         parent.insert(newChild, index);
 
         int[] newIndexs = new int[1];
@@ -413,8 +406,13 @@ public class MyTreeModel implements TreeModel {
 
     public void save() {
         T.o("DynamicTree: save()");
-        AqbSqlite.truncate();
+        aqbSqlite.truncate();
         walk(this, root);
+    }
+
+    public void saveSelected() {
+        T.o();
+        
     }
 
     /**
@@ -575,7 +573,7 @@ public class MyTreeModel implements TreeModel {
     }
 
     public void populateTree() {
-        List<MyAtomic> myAtomicSet = AqbSqlite.load();
+        List<MyAtomic> myAtomicSet = aqbSqlite.load();
         for (MyAtomic myAtomic : myAtomicSet) {
             T.o("\n");
             T.o("myAtomic.getpath() " + myAtomic.getPath());
@@ -642,13 +640,13 @@ public class MyTreeModel implements TreeModel {
                         + " '" + child.getLevel() + "',"
                         + " '" + child.getParent().getIndex(child) + "',"
                         + " '" + getPath(child) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getLogin().toString()) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getPassword().toString()) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getUrl().toString()) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getComment().toString()) + "'"
+                        + " '" + C.encrypt(aqbSqlite.getPassword(), myAtomic.getLogin().toString()) + "',"
+                        + " '" + C.encrypt(aqbSqlite.getPassword(), myAtomic.getPassword().toString()) + "',"
+                        + " '" + C.encrypt(aqbSqlite.getPassword(), myAtomic.getUrl().toString()) + "',"
+                        + " '" + C.encrypt(aqbSqlite.getPassword(), myAtomic.getComment().toString()) + "'"
                         + ");";
                 T.o("sql: " + sql);
-                AqbSqlite.insert(sql);
+                aqbSqlite.insert(sql);
             } else {
                 walk(model, child);
             }

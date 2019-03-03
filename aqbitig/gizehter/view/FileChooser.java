@@ -1,12 +1,12 @@
 package aqbitig.gizehter.view;
 
-import aqbitig.gizehter.controller.FileChooserInterface;
 import aqbitig.lib.basic.T;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import aqbitig.gizehter.controller.InterfaceFileChooser;
 
 /**
  * gizehter = giz(li) + anahtar
@@ -15,14 +15,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class FileChooser extends javax.swing.JPanel {
 
-    FileChooserInterface fileChooserInterface;
+    InterfaceFileChooser interfaceFileChooser;
     String mode;
 
     /**
      * Creates new form NewDatabase
      */
-    public FileChooser(String mode, FileChooserInterface fileChooserInterface) {
-        this.fileChooserInterface = fileChooserInterface;
+    public FileChooser(String mode, InterfaceFileChooser interfaceFileChooser) {
+        this.interfaceFileChooser = interfaceFileChooser;
         this.mode = mode;
         initComponents();
 
@@ -51,17 +51,11 @@ public class FileChooser extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -78,7 +72,7 @@ public class FileChooser extends javax.swing.JPanel {
                     T.o("mode: open: file not exists");
                     JOptionPane.showMessageDialog(null, "File not exists.");
                 } else {
-                    fileChooserInterface.getFile(selectedFile);
+                    interfaceFileChooser.getFile(selectedFile);
                 }
             } else if ("new".equals(mode)) {
                 if (selectedFile.exists()) {
@@ -89,7 +83,7 @@ public class FileChooser extends javax.swing.JPanel {
                     if (!filePath.toLowerCase().endsWith(".qb")) {
                         selectedFile = new File(filePath + ".qb");
                     }
-                    fileChooserInterface.getFile(selectedFile);
+                    interfaceFileChooser.getFile(selectedFile);
                 }
             }
 
@@ -99,7 +93,7 @@ public class FileChooser extends javax.swing.JPanel {
 
 
     }//GEN-LAST:event_jFileChooser1ActionPerformed
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser jFileChooser1;

@@ -11,11 +11,12 @@ import java.io.File;
  *
  * @author aqdaycuklu
  */
-public interface FileChooserInterface {
+public interface InterfaceFileChooser {
 
     /**
      *
      * @return
      */
     public void getFile(File fileName);
+    public void canceled();
 }

@@ -4,6 +4,7 @@ import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.gizehter.view.Main;
 import aqbitig.lib.basic.C;
 import aqbitig.lib.basic.T;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,7 +22,53 @@ import java.util.logging.Logger;
  */
 public class AqbSqlite {
 
-    public static void insert(String sql) {
+    public java.io.File file = null;
+    public String filePath = "";
+    public String mode = "";
+    public String password = "";
+
+    // CONSTRUCTOR
+    public AqbSqlite(java.io.File file, String password) {
+        this.file = file;
+        this.filePath = file.getPath();
+        this.password = password;
+    }
+
+    // GETTER AND SETTER
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    // METHOD
+    public void insert(String sql) {
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -32,7 +79,7 @@ public class AqbSqlite {
         Connection connection = null;
         try {
 
-            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.filePath);
+            connection = DriverManager.getConnection("jdbc:sqlite:" + this.filePath);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             int rs = statement.executeUpdate(sql);
@@ -51,7 +98,7 @@ public class AqbSqlite {
         }
     }
 
-    public static void query(String sql) {
+    public void query(String sql) {
 
         try {
             Class.forName("org.sqlite.JDBC");
@@ -61,7 +108,7 @@ public class AqbSqlite {
 
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
+            connection = DriverManager.getConnection("jdbc:sqlite:" + this.filePath);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery(sql);
@@ -83,13 +130,13 @@ public class AqbSqlite {
         }
     }
 
-    public static List<MyAtomic> load() {
+    public List<MyAtomic> load() {
         List<MyAtomic> myAtomicSet = new ArrayList<>();
         Connection connection = null;
         try {
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
+            connection = DriverManager.getConnection("jdbc:sqlite:" + this.filePath);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery("select * from atomic");
@@ -97,10 +144,10 @@ public class AqbSqlite {
             while (rs.next()) {
                 MyAtomic myAtomic = new MyAtomic(
                         rs.getString("path"),
-                        C.decrypt(Main.password, rs.getString("login")),
-                        C.decrypt(Main.password, rs.getString("password")),
-                        C.decrypt(Main.password, rs.getString("url")),
-                        C.decrypt(Main.password, rs.getString("comment"))
+                        C.decrypt(this.password, rs.getString("login")),
+                        C.decrypt(this.password, rs.getString("password")),
+                        C.decrypt(this.password, rs.getString("url")),
+                        C.decrypt(this.password, rs.getString("comment"))
                 );
                 myAtomicSet.add(myAtomic);
             }
@@ -122,11 +169,11 @@ public class AqbSqlite {
         return null;
     }
 
-    public static void truncate() {
+    public void truncate() {
         insert("DELETE FROM `atomic`; UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='atomic';");
     }
 
-    private static void createDatabase() {
+    private static void createDatabase(java.io.File file, String password) {
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException ex) {
@@ -135,7 +182,7 @@ public class AqbSqlite {
 
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
+            connection = DriverManager.getConnection("jdbc:sqlite:" + file);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
 
@@ -162,7 +209,7 @@ public class AqbSqlite {
             sql = "INSERT OR IGNORE INTO `settings`"
                     + " (`key`, `value`)"
                     + " VALUES"
-                    + "('password', '" + C.sha(Main.password) + "')";
+                    + "('password', '" + C.sha(password) + "')";
 
             System.out.println(statement.executeUpdate(sql));
 
@@ -179,7 +226,7 @@ public class AqbSqlite {
         }
     }
 
-    public static boolean checkPassword(String password) {
+    public static boolean checkPassword(String filePath, String password) {
         Connection connection = null;
 
         try {
@@ -188,7 +235,7 @@ public class AqbSqlite {
 
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:" + Main.file);
+            connection = DriverManager.getConnection("jdbc:sqlite:" + filePath);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             String sql = "SELECT `value` FROM `settings` WHERE `key` = 'password' AND `value` = '" + password + "';";
@@ -221,10 +268,10 @@ public class AqbSqlite {
         return false;
     }
 
-    public static boolean setPassword(String password) {
-        if (!Main.file.exists() && "new".equals(Main.mode)) {
-            AqbSqlite.createDatabase();
-            return checkPassword(password);
+    public static boolean setKey(java.io.File file, String password) {
+        if (!file.exists()) {
+            createDatabase(file, password);
+            return checkPassword(file.getPath(), password);
         }
         return false;
     }

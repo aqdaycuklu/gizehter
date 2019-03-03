@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aqbitig.gizehter.view;
+package aqbitig.gizehter.view.menu;
 
 /**
  *
  * @author aqdaycuklu
  */
-public class PopupMenu extends javax.swing.JPopupMenu {
+public class MenuTree extends javax.swing.JPopupMenu {
 
-    public PopupMenu(javax.swing.JTree jTree, int x, int y) {
+    public MenuTree(javax.swing.JTree jTree, int x, int y) {
 
         aqbitig.gizehter.controller.MyTreeModel treeModel = (aqbitig.gizehter.controller.MyTreeModel) jTree.getModel();
 
