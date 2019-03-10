@@ -1,5 +1,6 @@
-package aqbitig.gizehter.controller;
+package aqbitig.gizehter.view;
 
+import aqbitig.gizehter.controller.MyTransferHandler;
 import aqbitig.lib.basic.T;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;

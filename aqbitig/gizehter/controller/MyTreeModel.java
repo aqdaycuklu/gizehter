@@ -26,7 +26,7 @@ public class MyTreeModel implements TreeModel {
     protected DefaultMutableTreeNode root;
     protected EventListenerList listenerList = new EventListenerList();
     protected boolean asksAllowsChildren;
-    
+
     private aqbitig.lib.db.AqbSqlite aqbSqlite;
 
     /* constructor */
@@ -410,9 +410,26 @@ public class MyTreeModel implements TreeModel {
         walk(this, root);
     }
 
-    public void saveSelected() {
+    public void saveSelected(aqbitig.gizehter.model.MyAtomic node) {
         T.o();
-        
+        T.o(node.getPath());
+        T.o(node.getOldPath());
+
+        String sql = "INSERT OR IGNORE INTO `atomic`"
+                + " (`level`, `index`, `path`, `login`, `password`, `url`, `comment`)"
+                + " VALUES"
+                + " ("
+                + " '" + node.getLevel() + "',"
+                + " '" + node.getIndex() + "',"
+                + " '" + node.getPath() + "',"
+                + " '" + C.encrypt(aqbSqlite.getPassword(), node.getLogin()) + "',"
+                + " '" + C.encrypt(aqbSqlite.getPassword(), node.getPassword()) + "',"
+                + " '" + C.encrypt(aqbSqlite.getPassword(), node.getUrl()) + "',"
+                + " '" + C.encrypt(aqbSqlite.getPassword(), node.getComment()) + "'"
+                + ");";
+        T.o("sql: " + sql);
+        aqbSqlite.insert(sql);
+
     }
 
     /**
@@ -438,7 +455,6 @@ public class MyTreeModel implements TreeModel {
      */
     public DefaultMutableTreeNode addLeaf(TreePath parentPath) {
         DefaultMutableTreeNode parentNode;
-        MyAtomic myAtomic = new MyAtomic("project", "login", "password", "url", "comment");
 
         if (parentPath == null) {
             parentNode = root;
@@ -561,6 +577,8 @@ public class MyTreeModel implements TreeModel {
         this.insertNodeInto(childNode, parent, parent.getChildCount());
         if (!alloowsChildren) {
             ((MyAtomic) child).setPath(getPath(childNode));
+            ((MyAtomic) child).setLevel(childNode.getLevel());
+            ((MyAtomic) child).setIndex(parent.getIndex(childNode));
         } else {
             this.setAsksAllowsChildren(true);
         }

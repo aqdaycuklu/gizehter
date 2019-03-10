@@ -16,7 +16,7 @@ import javax.swing.JSplitPane;
  */
 public class SplitPane extends javax.swing.JPanel {
 
-    public SplitPane(aqbitig.gizehter.controller.MyTree myTree, aqbitig.gizehter.view.Info info) {
+    public SplitPane(aqbitig.gizehter.view.MyTree myTree, aqbitig.gizehter.view.Info info) {
 
         // LEFT AND RIGHT COMPONENTS
         myTree.setMinimumSize(new Dimension(200, 300));

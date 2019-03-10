@@ -90,6 +90,7 @@ public class MyTransferHandler extends TransferHandler {
         T.o("target node: " + targetNode);
 
         // MOVE NODE
+        ((aqbitig.gizehter.model.MyAtomic) insertNode.getUserObject()).setNewPath(targetNode.toString());
         myTreeModel.insertNodeInto(insertNode, targetNode, targetNode.getChildCount());
 
         // REMOVE SOURCE

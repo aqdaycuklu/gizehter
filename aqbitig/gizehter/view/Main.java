@@ -42,6 +42,9 @@ public class Main extends javax.swing.JFrame {
         /* CONTENT PANE */
         contentPane();
         pack();
+        
+        /* DEV */
+        internalFrame("open");
     }
 
     private void lookAndFeel() {

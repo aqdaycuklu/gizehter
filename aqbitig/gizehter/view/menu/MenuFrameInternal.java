@@ -13,10 +13,10 @@ public class MenuFrameInternal extends javax.swing.JMenuBar {
 
     private javax.swing.JMenu jMenuFile;
     private javax.swing.JMenu jMenuTree;
-    private aqbitig.gizehter.controller.MyTree myTree;
+    private aqbitig.gizehter.view.MyTree myTree;
     private aqbitig.gizehter.controller.MyTreeModel myTreeModel;
 
-    public MenuFrameInternal(aqbitig.gizehter.controller.MyTree myTree) {
+    public MenuFrameInternal(aqbitig.gizehter.view.MyTree myTree) {
         this.myTree = myTree;
         this.myTreeModel = (aqbitig.gizehter.controller.MyTreeModel) myTree.getModel();
         this.add(menuFile());

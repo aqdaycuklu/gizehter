@@ -11,5 +11,5 @@ package aqbitig.gizehter.controller;
  */
 public interface InterfaceInfo {
 
-    public void save();
+    public void save(aqbitig.gizehter.model.MyAtomic node);
 }

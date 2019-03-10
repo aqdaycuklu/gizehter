@@ -33,15 +33,18 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
     // PANEL
     private aqbitig.gizehter.view.SplitPane splitPane;
-    private aqbitig.gizehter.controller.MyTree myTree;
+    private aqbitig.gizehter.view.MyTree myTree;
     private aqbitig.gizehter.controller.MyTreeModel myTreeModel;
     private aqbitig.gizehter.view.Info info;
 
     // DATABASE
     private aqbitig.lib.db.AqbSqlite aqbSqlite;
-    
+
     private static int openFrameCount = 1;
     private final int xOffset = 30, yOffset = 30;
+
+    private String devDir = "/home/aqdaycuklu/Documents/test.qb";
+    private String devPassword = "seda";
 
     public InternalFrame(String mode) {
         super(mode + " qb " + (++openFrameCount),
@@ -60,7 +63,11 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
         // always start file chooser
         this.setConfigMode(mode);
-        screenFileChooser();
+        //screenFileChooser();
+
+        setConfigFile(new java.io.File("/home/aqdaycuklu/Documents/test.qb"));
+        setConfigPassword(new String("seda"));
+        screenSplitPane();
     }
 
     private void screenFileChooser() {
@@ -107,14 +114,13 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
     private void screenSplitPane() {
 
-        aqbitig.lib.io.FileManager.backup(getFile().getPath());
+        //aqbitig.lib.io.FileManager.backup(getFile().getPath());
 
-        this.info = new aqbitig.gizehter.view.Info(() -> {
-            myTreeModel.saveSelected();
-
+        this.info = new aqbitig.gizehter.view.Info((node) -> {
+            myTreeModel.saveSelected(node);
         });
 
-        this.myTree = new aqbitig.gizehter.controller.MyTree();
+        this.myTree = new aqbitig.gizehter.view.MyTree();
         this.myTree.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
@@ -140,7 +146,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
                 DefaultMutableTreeNode defaultMutableTreeNode = (DefaultMutableTreeNode) (path.getLastPathComponent());
                 if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren() && defaultMutableTreeNode.getUserObject() instanceof MyAtomic) {
                     MyAtomic m = (MyAtomic) defaultMutableTreeNode.getUserObject();
-                    T.o(m.login);
+                    T.o(m.getLogin());
                     info.setNode(m);
                     info.activate();
                 } else if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren()) {
@@ -151,11 +157,10 @@ public class InternalFrame extends javax.swing.JInternalFrame {
                 }
             }
         });
-        
+
         // DATABASE
         aqbitig.lib.db.AqbSqlite aqbSqlite = new aqbitig.lib.db.AqbSqlite(this.file, this.password);
-        
-        
+
         // TREE MODEL
         MyTreeModel myTreeModel = new MyTreeModel(aqbSqlite);
         myTreeModel.addTreeModelListener(new TreeModelListener() {
@@ -180,7 +185,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
             }
         });
         this.myTree.setModel(myTreeModel);
-        
+
         this.myTreeModel = (aqbitig.gizehter.controller.MyTreeModel) this.myTree.getModel();
         this.splitPane = new aqbitig.gizehter.view.SplitPane(this.myTree, this.info);
 

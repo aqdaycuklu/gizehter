@@ -32,11 +32,11 @@ public class Info extends javax.swing.JPanel {
 
     public void setNode(MyAtomic node) {
         this.node = node;
-        this.jTextFieldLogin.setText(node.login);
-        this.jPasswordFieldPassword.setText(node.password);
+        this.jTextFieldLogin.setText(node.getLogin());
+        this.jPasswordFieldPassword.setText(node.getPassword());
         this.jTextFieldUrl.setText(node.getUrl());
         this.jTextPaneComment.setText(node.getComment());
-        this.jLabel1.setText(node.getPath());
+        this.jLabel1.setText("PATH[" + node.getPath() + "] - LEVEL[" + node.getLevel() + "] - INDEX[" + node.getIndex() + "]");
     }
 
     public void clear() {
@@ -165,7 +165,7 @@ public class Info extends javax.swing.JPanel {
         node.setUrl(jTextFieldUrl.getText());
         node.setComment(jTextPaneComment.getText());
         
-        interfaceInfo.save();
+        interfaceInfo.save(node);
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jPasswordFieldPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordFocusGained
