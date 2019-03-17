@@ -6,6 +6,7 @@ import aqbitig.lib.basic.C;
 import aqbitig.lib.basic.T;
 import aqbitig.lib.db.AqbSqlite;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.event.EventListenerList;
 import javax.swing.event.TreeModelEvent;
@@ -192,9 +193,7 @@ public class MyTreeModel implements TreeModel {
         return retNodes;
     }
 
-    protected void fireTreeStructureChanged(Object source, Object[] path,
-            int[] childIndices,
-            Object[] children) {
+    protected void fireTreeStructureChanged(Object source, Object[] path, int[] childIndices, Object[] children) {
         T.o();
         // Guaranteed to return a non-null array
         Object[] listeners = listenerList.getListenerList();
@@ -251,31 +250,25 @@ public class MyTreeModel implements TreeModel {
 
     public void nodesWereInserted(TreeNode node, int[] childIndices) {
         T.o();
-        if (listenerList != null && node != null && childIndices != null
-                && childIndices.length > 0) {
+        if (listenerList != null && node != null && childIndices != null && childIndices.length > 0) {
             int cCount = childIndices.length;
             Object[] newChildren = new Object[cCount];
 
             for (int counter = 0; counter < cCount; counter++) {
                 newChildren[counter] = node.getChildAt(childIndices[counter]);
             }
-            fireTreeNodesInserted(this, getPathToRoot(node), childIndices,
-                    newChildren);
+            fireTreeNodesInserted(this, getPathToRoot(node), childIndices, newChildren);
         }
     }
 
-    public void nodesWereRemoved(TreeNode node, int[] childIndices,
-            Object[] removedChildren) {
+    public void nodesWereRemoved(TreeNode node, int[] childIndices, Object[] removedChildren) {
         T.o();
         if (node != null && childIndices != null) {
-            fireTreeNodesRemoved(this, getPathToRoot(node), childIndices,
-                    removedChildren);
+            fireTreeNodesRemoved(this, getPathToRoot(node), childIndices, removedChildren);
         }
     }
 
-    protected void fireTreeNodesInserted(Object source, Object[] path,
-            int[] childIndices,
-            Object[] children) {
+    protected void fireTreeNodesInserted(Object source, Object[] path, int[] childIndices, Object[] children) {
         T.o();
         // Guaranteed to return a non-null array
         Object[] listeners = listenerList.getListenerList();
@@ -590,8 +583,7 @@ public class MyTreeModel implements TreeModel {
         return childNode;
     }
 
-    public void populateTree() {
-        List<MyAtomic> myAtomicSet = aqbSqlite.load();
+    public void populateTree(ArrayList<MyAtomic> myAtomicSet) {
         for (MyAtomic myAtomic : myAtomicSet) {
             T.o("\n");
             T.o("myAtomic.getpath() " + myAtomic.getPath());
@@ -643,15 +635,16 @@ public class MyTreeModel implements TreeModel {
 
     }
 
-    public void walk(TreeModel model, Object o) {
+    public String walk(TreeModel model, Object o) {
         int childCount = model.getChildCount(o);
         T.o("childCount: " + childCount);
+        
         for (int i = 0; i < childCount; i++) {
             DefaultMutableTreeNode child = (DefaultMutableTreeNode) model.getChild(o, i);
             if (model.isLeaf(child) && !child.getAllowsChildren()) {
                 //System.out.println(child.toString());
                 MyAtomic myAtomic = (MyAtomic) child.getUserObject();
-                String sql = "INSERT OR IGNORE INTO `atomic`"
+                return "INSERT OR IGNORE INTO `atomic`"
                         + " (`level`, `index`, `path`, `login`, `password`, `url`, `comment`)"
                         + " VALUES"
                         + " ("
@@ -663,12 +656,14 @@ public class MyTreeModel implements TreeModel {
                         + " '" + C.encrypt(aqbSqlite.getPassword(), myAtomic.getUrl().toString()) + "',"
                         + " '" + C.encrypt(aqbSqlite.getPassword(), myAtomic.getComment().toString()) + "'"
                         + ");";
-                T.o("sql: " + sql);
-                aqbSqlite.insert(sql);
+                //T.o("sql: " + sql);
+                //aqbSqlite.insert(sql);
             } else {
-                walk(model, child);
+                return walk(model, child);
             }
         }
+        
+        return "";
     }
 
     public String getPath(DefaultMutableTreeNode node) {

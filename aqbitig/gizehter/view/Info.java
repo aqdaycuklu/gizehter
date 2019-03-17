@@ -165,7 +165,7 @@ public class Info extends javax.swing.JPanel {
         node.setUrl(jTextFieldUrl.getText());
         node.setComment(jTextPaneComment.getText());
         
-        interfaceInfo.save(node);
+        //interfaceInfo.save(node);
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jPasswordFieldPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordFocusGained

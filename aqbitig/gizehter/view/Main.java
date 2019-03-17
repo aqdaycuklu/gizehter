@@ -30,6 +30,9 @@ public class Main extends javax.swing.JFrame {
 
     public Main() {
 
+        /* CLOSE Button */
+        this.setDefaultCloseOperation( javax.swing.JFrame.EXIT_ON_CLOSE);
+        
         /* LOOK AND FEEL */
         lookAndFeel();
 
@@ -44,7 +47,7 @@ public class Main extends javax.swing.JFrame {
         pack();
         
         /* DEV */
-        internalFrame("open");
+        //internalFrame("open");
     }
 
     private void lookAndFeel() {

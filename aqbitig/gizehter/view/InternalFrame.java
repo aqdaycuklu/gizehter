@@ -43,9 +43,9 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private static int openFrameCount = 1;
     private final int xOffset = 30, yOffset = 30;
 
-    private String devDir = "/home/aqdaycuklu/Documents/test.qb";
-    private String devPassword = "seda";
-
+    // DEV
+    //private String devDir = "/home/aqdaycuklu/Documents/test.qb";
+    //private String devPassword = "seda";
     public InternalFrame(String mode) {
         super(mode + " qb " + (++openFrameCount),
                 true, //resizable
@@ -63,11 +63,12 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
         // always start file chooser
         this.setConfigMode(mode);
-        //screenFileChooser();
+        screenFileChooser();
 
-        setConfigFile(new java.io.File("/home/aqdaycuklu/Documents/test.qb"));
-        setConfigPassword(new String("seda"));
-        screenSplitPane();
+        // DEV
+        //setConfigFile(new java.io.File("/home/aqdaycuklu/Documents/test.qb"));
+        //setConfigPassword(new String("seda"));
+        //screenSplitPane();
     }
 
     private void screenFileChooser() {
@@ -114,8 +115,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
     private void screenSplitPane() {
 
-        //aqbitig.lib.io.FileManager.backup(getFile().getPath());
-
+        aqbitig.lib.io.FileManager.backup(getFile().getPath());
         this.info = new aqbitig.gizehter.view.Info((node) -> {
             myTreeModel.saveSelected(node);
         });
@@ -159,10 +159,10 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         });
 
         // DATABASE
-        aqbitig.lib.db.AqbSqlite aqbSqlite = new aqbitig.lib.db.AqbSqlite(this.file, this.password);
+        this.aqbSqlite = new aqbitig.lib.db.AqbSqlite(this.file, this.password);
 
         // TREE MODEL
-        MyTreeModel myTreeModel = new MyTreeModel(aqbSqlite);
+        MyTreeModel myTreeModel = new MyTreeModel(this.aqbSqlite);
         myTreeModel.addTreeModelListener(new TreeModelListener() {
             @Override
             public void treeNodesChanged(TreeModelEvent e) {
@@ -192,7 +192,9 @@ public class InternalFrame extends javax.swing.JInternalFrame {
         // set menu bar
         setJMenuBar(new aqbitig.gizehter.view.menu.MenuFrameInternal(this.myTree));
 
-        //((MyTreeModel) this.splitPane.getjTree().getModel()).populateTree();
+        if (this.mode.equalsIgnoreCase("open")) {
+            ((MyTreeModel) this.myTree.getModel()).populateTree(this.aqbSqlite.load());
+        }
         this.splitPane.setVisible(true);
         getContentPane().removeAll();
 

@@ -1,5 +1,7 @@
 package aqbitig.gizehter.model;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  * gizehter = giz(li) + anahtar
  *
@@ -42,7 +44,7 @@ public class MyAtomic {
 
     public MyAtomic(String path, String login, String password, String url, String comment) {
         this.newNode = false;
-        this.path = this.oldPath = oldPath;
+        this.path = this.oldPath = path;
         this.login = login;
         this.password = password;
         this.url = url;
@@ -73,8 +75,10 @@ public class MyAtomic {
         this.oldPath = oldPath;
     }
 
-    public void setNewPath(String parentPath) {
-        this.path = parentPath + '.' + this.path.substring(this.path.lastIndexOf('.') + 1);
+    public void setNewPath(DefaultMutableTreeNode parent) {
+        
+        
+//        this.path = parentPath + '.' + this.path.substring(this.path.lastIndexOf('.') + 1);
     }
 
     public String getLogin() {

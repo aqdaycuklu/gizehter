@@ -130,18 +130,19 @@ public class AqbSqlite {
         }
     }
 
-    public List<MyAtomic> load() {
-        List<MyAtomic> myAtomicSet = new ArrayList<>();
+    public java.util.ArrayList<MyAtomic> load() {
+        java.util.ArrayList<MyAtomic> myAtomicSet = new java.util.ArrayList<>();
         Connection connection = null;
         try {
             Class.forName("org.sqlite.JDBC");
-
+            T.o(this.filePath);
             connection = DriverManager.getConnection("jdbc:sqlite:" + this.filePath);
             Statement statement = connection.createStatement();
             statement.setQueryTimeout(30);
             ResultSet rs = statement.executeQuery("select * from atomic");
 
             while (rs.next()) {
+                T.o(rs.getString("path") + " " + C.decrypt(this.password, rs.getString("login")));
                 MyAtomic myAtomic = new MyAtomic(
                         rs.getString("path"),
                         C.decrypt(this.password, rs.getString("login")),
@@ -151,6 +152,7 @@ public class AqbSqlite {
                 );
                 myAtomicSet.add(myAtomic);
             }
+            T.o(myAtomicSet);
 
             return myAtomicSet;
         } catch (SQLException e) {
