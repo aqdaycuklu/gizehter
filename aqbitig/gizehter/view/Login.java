@@ -11,17 +11,20 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JPanel {
 
-    InterfaceLogin loginInterface;
+    private final InterfaceLogin loginInterface;
+    private final String mode;
 
     /**
      * Creates new form Login
      *
      * @param loginInterface
      */
-    public Login(InterfaceLogin loginInterface) {
+    public Login(String mode, InterfaceLogin loginInterface) {
 
         this.loginInterface = loginInterface;
+        this.mode = mode;
         initComponents();
+        this.jPasswordField2.
     }
 
     /**
@@ -93,7 +96,9 @@ public class Login extends javax.swing.JPanel {
     private void jButtonPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordActionPerformed
         // TODO add your handling code here:
 
-        if (Arrays.toString(jPasswordField1.getPassword()).equals(Arrays.toString(jPasswordField2.getPassword()))) {
+        if(this.mode.equalsIgnoreCase("open")){
+            loginInterface.checkPassword(jPasswordField1.getPassword());
+        }else if (Arrays.toString(jPasswordField1.getPassword()).equals(Arrays.toString(jPasswordField2.getPassword()))) {
             loginInterface.checkPassword(jPasswordField1.getPassword());
         } else {
             JOptionPane.showMessageDialog(null, "Password incorrect!");

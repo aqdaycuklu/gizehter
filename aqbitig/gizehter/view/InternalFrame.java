@@ -90,7 +90,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private void screenLogin() {
 
         /* LOGIN */
-        aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login((char[] password) -> {
+        aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login(this.mode, (char[] password) -> {
             T.o(password);
             setConfigPassword(new String(password));
             if (this.mode.equalsIgnoreCase("open") && !aqbitig.lib.db.AqbSqlite.checkPassword(getFile().getPath(), this.password)) {
@@ -116,9 +116,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     private void screenSplitPane() {
 
         aqbitig.lib.io.FileManager.backup(getFile().getPath());
-        this.info = new aqbitig.gizehter.view.Info((node) -> {
-            myTreeModel.saveSelected(node);
-        });
+        this.info = new aqbitig.gizehter.view.Info();
 
         this.myTree = new aqbitig.gizehter.view.MyTree();
         this.myTree.addMouseListener(new java.awt.event.MouseAdapter() {

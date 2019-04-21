@@ -13,15 +13,11 @@ public class Info extends javax.swing.JPanel {
     MyAtomic node;
     char passwordChar;
     
-    aqbitig.gizehter.controller.InterfaceInfo interfaceInfo;
-    
 
     /**
      * Creates new form input
-     * @param interfaceInfo
      */
-    public Info(aqbitig.gizehter.controller.InterfaceInfo interfaceInfo) {
-        this.interfaceInfo = interfaceInfo;
+    public Info() {
         initComponents();
         this.passwordChar = jPasswordFieldPassword.getEchoChar();
     }
@@ -97,7 +93,7 @@ public class Info extends javax.swing.JPanel {
 
         jScrollPane1.setViewportView(jTextPaneComment);
 
-        jButtonSave.setText("Save");
+        jButtonSave.setText("Hold");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveActionPerformed(evt);
@@ -164,8 +160,6 @@ public class Info extends javax.swing.JPanel {
         node.setPassword(jPasswordFieldPassword.getText());
         node.setUrl(jTextFieldUrl.getText());
         node.setComment(jTextPaneComment.getText());
-        
-        //interfaceInfo.save(node);
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jPasswordFieldPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordFocusGained
