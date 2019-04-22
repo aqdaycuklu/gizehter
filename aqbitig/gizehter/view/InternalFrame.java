@@ -146,13 +146,11 @@ public class InternalFrame extends javax.swing.JInternalFrame {
                 T.o(m.getLogin());
                 info.setNode(m);
                 info.activate();
-                info.deactivateHold();
             } else if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren()) {
                 MyAtomic m = new MyAtomic();
                 defaultMutableTreeNode.setUserObject(m);
                 info.setNode(m);
                 info.activate();
-                info.deactivateHold();
             }
         });
 

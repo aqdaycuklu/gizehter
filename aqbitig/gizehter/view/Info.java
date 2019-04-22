@@ -78,6 +78,8 @@ public class Info extends javax.swing.JPanel {
         this.jPasswordFieldPassword.setEnabled(true);
         this.jTextFieldUrl.setEnabled(true);
         this.jTextPaneComment.setEnabled(true);
+        this.jButtonSave.setEnabled(false);
+
     }
 
     public void deactivate() {
