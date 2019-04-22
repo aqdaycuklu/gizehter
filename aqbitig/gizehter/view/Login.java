@@ -24,7 +24,6 @@ public class Login extends javax.swing.JPanel {
         this.loginInterface = loginInterface;
         this.mode = mode;
         initComponents();
-        this.jPasswordField2.
     }
 
     /**
@@ -67,6 +66,9 @@ public class Login extends javax.swing.JPanel {
                 jPasswordField2MouseClicked(evt);
             }
         });
+        if(this.mode.equalsIgnoreCase("open")){
+            jPasswordField2.setVisible(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -96,9 +98,7 @@ public class Login extends javax.swing.JPanel {
     private void jButtonPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordActionPerformed
         // TODO add your handling code here:
 
-        if(this.mode.equalsIgnoreCase("open")){
-            loginInterface.checkPassword(jPasswordField1.getPassword());
-        }else if (Arrays.toString(jPasswordField1.getPassword()).equals(Arrays.toString(jPasswordField2.getPassword()))) {
+        if(this.mode.equalsIgnoreCase("open") || Arrays.toString(jPasswordField1.getPassword()).equals(Arrays.toString(jPasswordField2.getPassword()))){
             loginInterface.checkPassword(jPasswordField1.getPassword());
         } else {
             JOptionPane.showMessageDialog(null, "Password incorrect!");

@@ -5,6 +5,8 @@
  */
 package aqbitig.gizehter.view.menu;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  *
  * @author aqdaycuklu
@@ -17,8 +19,16 @@ public class MenuTree extends javax.swing.JPopupMenu {
 
         javax.swing.JMenuItem jMenuItemRename = new javax.swing.JMenuItem("Rename");
         jMenuItemRename.addActionListener((java.awt.event.ActionEvent evt) -> {
+
+
+            jTree.setFocusable(true);
+            jTree.setRequestFocusEnabled(true);
+            jTree.setEditable(true);
+            jTree.requestFocus();
             jTree.requestFocusInWindow();
-            jTree.setInvokesStopCellEditing(true);
+            //jTree.setInvokesStopCellEditing(true);
+
+            jTree.getCellEditor().getTreeCellEditorComponent(jTree, (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent(), true, true, true,((DefaultMutableTreeNode) jTree.getLastSelectedPathComponent()).getParent().getIndex((DefaultMutableTreeNode) jTree.getLastSelectedPathComponent())).setFocusable(true);
         });
         this.add(jMenuItemRename);
 

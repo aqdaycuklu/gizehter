@@ -117,6 +117,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
         aqbitig.lib.io.FileManager.backup(getFile().getPath());
         this.info = new aqbitig.gizehter.view.Info();
+        this.info.deactivate();
 
         this.myTree = new aqbitig.gizehter.view.MyTree();
         this.myTree.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,32 +128,31 @@ public class InternalFrame extends javax.swing.JInternalFrame {
                 }
             }
         });
-        this.myTree.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
-                T.o(e.getPath());
+        this.myTree.addTreeSelectionListener((TreeSelectionEvent e) -> {
+            T.o(e.getPath());
 
-                info.clear();
-                info.deactivate();
+            info.clear();
+            info.deactivate();
 
-                TreePath path = e.getPath();//myTree.getSelectionPath();
-                T.o(path.toString());
+            TreePath path = e.getPath();//myTree.getSelectionPath();
+            T.o(path.toString());
 
-                TreeNode node = (TreeNode) path.getLastPathComponent();
-                T.o(node);
+            TreeNode node = (TreeNode) path.getLastPathComponent();
+            T.o(node);
 
-                DefaultMutableTreeNode defaultMutableTreeNode = (DefaultMutableTreeNode) (path.getLastPathComponent());
-                if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren() && defaultMutableTreeNode.getUserObject() instanceof MyAtomic) {
-                    MyAtomic m = (MyAtomic) defaultMutableTreeNode.getUserObject();
-                    T.o(m.getLogin());
-                    info.setNode(m);
-                    info.activate();
-                } else if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren()) {
-                    MyAtomic m = new MyAtomic();
-                    defaultMutableTreeNode.setUserObject(m);
-                    info.setNode(m);
-                    info.activate();
-                }
+            DefaultMutableTreeNode defaultMutableTreeNode = (DefaultMutableTreeNode) (path.getLastPathComponent());
+            if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren() && defaultMutableTreeNode.getUserObject() instanceof MyAtomic) {
+                MyAtomic m = (MyAtomic) defaultMutableTreeNode.getUserObject();
+                T.o(m.getLogin());
+                info.setNode(m);
+                info.activate();
+                info.deactivateHold();
+            } else if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren()) {
+                MyAtomic m = new MyAtomic();
+                defaultMutableTreeNode.setUserObject(m);
+                info.setNode(m);
+                info.activate();
+                info.deactivateHold();
             }
         });
 
