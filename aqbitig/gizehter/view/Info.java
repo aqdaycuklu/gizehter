@@ -2,6 +2,8 @@ package aqbitig.gizehter.view;
 
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.lib.basic.T;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -49,6 +51,15 @@ public class Info extends javax.swing.JPanel {
         this.jPasswordFieldPassword.getDocument().addDocumentListener(this.documentListener);
         this.jTextFieldUrl.getDocument().addDocumentListener(this.documentListener);
         this.jTextPaneComment.getDocument().addDocumentListener(this.documentListener);
+
+        this.jLabelPassword.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                T.o(e.getClickCount());
+                if (e.getClickCount() == 2) {
+                    T.copyToClipboard(new String(jPasswordFieldPassword.getPassword()));
+                }
+            }
+        });
     }
 
     /* LISTENERS. */
@@ -87,10 +98,6 @@ public class Info extends javax.swing.JPanel {
         this.jPasswordFieldPassword.setEnabled(false);
         this.jTextFieldUrl.setEnabled(false);
         this.jTextPaneComment.setEnabled(false);
-        this.jButtonSave.setEnabled(false);
-    }
-
-    public void deactivateHold() {
         this.jButtonSave.setEnabled(false);
     }
 
@@ -204,6 +211,7 @@ public class Info extends javax.swing.JPanel {
         node.setPassword(String.valueOf(jPasswordFieldPassword.getPassword()));
         node.setUrl(jTextFieldUrl.getText());
         node.setComment(jTextPaneComment.getText());
+        this.jButtonSave.setEnabled(false);
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jPasswordFieldPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordFocusGained

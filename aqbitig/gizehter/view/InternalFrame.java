@@ -143,7 +143,6 @@ public class InternalFrame extends javax.swing.JInternalFrame {
             DefaultMutableTreeNode defaultMutableTreeNode = (DefaultMutableTreeNode) (path.getLastPathComponent());
             if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren() && defaultMutableTreeNode.getUserObject() instanceof MyAtomic) {
                 MyAtomic m = (MyAtomic) defaultMutableTreeNode.getUserObject();
-                T.o(m.getLogin());
                 info.setNode(m);
                 info.activate();
             } else if (defaultMutableTreeNode.isLeaf() && !defaultMutableTreeNode.getAllowsChildren()) {

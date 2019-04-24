@@ -644,7 +644,7 @@ public class MyTreeModel implements TreeModel {
             if (model.isLeaf(child) && !child.getAllowsChildren()) {
                 //System.out.println(child.toString());
                 MyAtomic myAtomic = (MyAtomic) child.getUserObject();
-                return "INSERT OR IGNORE INTO `atomic`"
+                String sql = "INSERT OR IGNORE INTO `atomic`"
                         + " (`level`, `index`, `path`, `login`, `password`, `url`, `comment`)"
                         + " VALUES"
                         + " ("
@@ -657,7 +657,7 @@ public class MyTreeModel implements TreeModel {
                         + " '" + C.encrypt(aqbSqlite.getPassword(), myAtomic.getComment().toString()) + "'"
                         + ");";
                 //T.o("sql: " + sql);
-                //aqbSqlite.insert(sql);
+                aqbSqlite.insert(sql);
             } else {
                 return walk(model, child);
             }
