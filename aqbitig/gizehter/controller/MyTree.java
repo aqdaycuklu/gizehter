@@ -7,13 +7,17 @@ package aqbitig.gizehter.controller;
  */
 public class MyTree extends javax.swing.JTree {
 
-    public MyTree(InterfaceTree iface) {
+    /**
+     *
+     * @param abstractTree
+     */
+    public MyTree(aqbitig.gizehter.controller.AbstractTree abstractTree) {
 
-        MyTreeModel myTreeModel = new MyTreeModel();
+        MyTreeModel myTreeModel = new MyTreeModel(abstractTree);
         myTreeModel.addTreeModelListener(new MyTreeModelListener());
-        if ("open".equalsIgnoreCase(aqbitig.gizehter.view.Main.mode)) {
-            myTreeModel.populateTree();
-        }
+       // if ("open".equalsIgnoreCase(aqbitig.gizehter.view.Main.mode)) {
+       //     myTreeModel.populateTree();
+       // }
         this.setModel(myTreeModel);
         this.setDragEnabled(true);
         this.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
@@ -28,7 +32,7 @@ public class MyTree extends javax.swing.JTree {
                 if (e.isPopupTrigger()) {
                     aqbitig.gizehter.view.PopupMenu popupMenu = new aqbitig.gizehter.view.PopupMenu((javax.swing.JTree) e.getComponent(), e.getX(), e.getY());
                 } else {
-                    iface.leafSelected();
+                    abstractTree.leafSelected();
                 }
             }
         });

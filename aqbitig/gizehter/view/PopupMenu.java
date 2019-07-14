@@ -17,6 +17,7 @@ public class PopupMenu extends javax.swing.JPopupMenu {
 
         javax.swing.JMenuItem jMenuItemRename = new javax.swing.JMenuItem("Rename");
         jMenuItemRename.addActionListener((java.awt.event.ActionEvent evt) -> {
+            System.out.println("dd");
             jTree.requestFocusInWindow();
             jTree.setInvokesStopCellEditing(true);
         });

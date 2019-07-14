@@ -26,14 +26,15 @@ public class MyTreeModel implements TreeModel {
     protected DefaultMutableTreeNode root;
     protected EventListenerList listenerList = new EventListenerList();
     protected boolean asksAllowsChildren;
-    public File file;
+    aqbitig.gizehter.controller.AbstractTree abstractTree;
 
     /* constructor */
     public MyTreeModel(DefaultMutableTreeNode root) {
         this(root, false);
     }
 
-    public MyTreeModel() {
+    public MyTreeModel(aqbitig.gizehter.controller.AbstractTree abstractTree) {
+        this.abstractTree = abstractTree;
         this.root = new DefaultMutableTreeNode("root");
     }
 
@@ -68,13 +69,15 @@ public class MyTreeModel implements TreeModel {
         return asksAllowsChildren;
     }
 
-    public File getFile() {
-        return file;
+    public AbstractTree getAbstractTree() {
+        return abstractTree;
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    public void setAbstractTree(AbstractTree abstractTree) {
+        this.abstractTree = abstractTree;
     }
+    
+    
 
     /* class attributes. */
 
@@ -343,8 +346,7 @@ public class MyTreeModel implements TreeModel {
     }
 
     //----------
-    public void insertNodeInto(MutableTreeNode newChild,
-            MutableTreeNode parent, int index) {
+    public void insertNodeInto(MutableTreeNode newChild, MutableTreeNode parent, int index) {
         parent.insert(newChild, index);
 
         int[] newIndexs = new int[1];
@@ -413,7 +415,7 @@ public class MyTreeModel implements TreeModel {
 
     public void save() {
         T.o("DynamicTree: save()");
-        AqbSqlite.truncate();
+        abstractTree.truncate();
         walk(this, root);
     }
 
@@ -575,7 +577,7 @@ public class MyTreeModel implements TreeModel {
     }
 
     public void populateTree() {
-        List<MyAtomic> myAtomicSet = AqbSqlite.load();
+        List<MyAtomic> myAtomicSet = abstractTree.load();
         for (MyAtomic myAtomic : myAtomicSet) {
             T.o("\n");
             T.o("myAtomic.getpath() " + myAtomic.getPath());
@@ -642,13 +644,13 @@ public class MyTreeModel implements TreeModel {
                         + " '" + child.getLevel() + "',"
                         + " '" + child.getParent().getIndex(child) + "',"
                         + " '" + getPath(child) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getLogin().toString()) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getPassword().toString()) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getUrl().toString()) + "',"
-                        + " '" + C.encrypt(Main.password, myAtomic.getComment().toString()) + "'"
+                        + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getLogin().toString()) + "',"
+                        + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getPassword().toString()) + "',"
+                        + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getUrl().toString()) + "',"
+                        + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getComment().toString()) + "'"
                         + ");";
                 T.o("sql: " + sql);
-                AqbSqlite.insert(sql);
+                abstractTree.insert(sql);
             } else {
                 walk(model, child);
             }
