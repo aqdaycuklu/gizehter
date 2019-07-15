@@ -1,8 +1,8 @@
 package aqbitig.gizehter.view;
 
-import aqbitig.gizehter.controller.InterfaceLogin;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
+import aqbitig.gizehter.controller.bridge.InterfaceLogin;
 
 /**
  * gizehter = giz(li) + anahtar
@@ -14,7 +14,7 @@ public class Login extends javax.swing.JPanel {
     InterfaceLogin loginInterface;
 
     /**
-     * Creates new form Login
+     * Creates new form InterfaceLogin
      *
      * @param loginInterface
      */

@@ -8,7 +8,7 @@ package aqbitig.gizehter.model;
 public class MyAtomic {
 
     // ATOMIC DATA
-    public String path, login, password, url, comment;
+    private String path, login, password, url, comment;
 
     // SHOW
     boolean leaf;
