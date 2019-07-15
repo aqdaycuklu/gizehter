@@ -15,7 +15,7 @@ public class MenuBar extends javax.swing.JMenuBar {
     private javax.swing.JMenu jMenuTree;
     private javax.swing.JMenu jMenuInfo;
 
-    public MenuBar(aqbitig.gizehter.controller.InterfaceMenuBar interfaceMenuBar) {
+    public MenuBar(aqbitig.gizehter.controller.bridge.InterfaceMenuBar interfaceMenuBar) {
 
         this.add(menuFile(interfaceMenuBar));
         this.add(menuTree(interfaceMenuBar));
@@ -23,7 +23,7 @@ public class MenuBar extends javax.swing.JMenuBar {
 
     }
 
-    private javax.swing.JMenu menuFile(aqbitig.gizehter.controller.InterfaceMenuBar interfaceMenuBar) {
+    private javax.swing.JMenu menuFile(aqbitig.gizehter.controller.bridge.InterfaceMenuBar interfaceMenuBar) {
         this.jMenuFile = new javax.swing.JMenu("File");
 
         javax.swing.JMenuItem jMenuItemNew = new javax.swing.JMenuItem("New");
@@ -62,7 +62,7 @@ public class MenuBar extends javax.swing.JMenuBar {
         return this.jMenuFile;
     }
 
-    private javax.swing.JMenu menuTree(aqbitig.gizehter.controller.InterfaceMenuBar interfaceMenuBar) {
+    private javax.swing.JMenu menuTree(aqbitig.gizehter.controller.bridge.InterfaceMenuBar interfaceMenuBar) {
         this.jMenuTree = new javax.swing.JMenu("Tree");
 
         javax.swing.JMenuItem jMenuItemAddBranch = new javax.swing.JMenuItem("Add Branch");
@@ -101,7 +101,7 @@ public class MenuBar extends javax.swing.JMenuBar {
         return this.jMenuTree;
     }
 
-    private javax.swing.JMenu menuInfo(aqbitig.gizehter.controller.InterfaceMenuBar interfaceMenuBar) {
+    private javax.swing.JMenu menuInfo(aqbitig.gizehter.controller.bridge.InterfaceMenuBar interfaceMenuBar) {
         this.jMenuInfo = new javax.swing.JMenu("Info");
 
         javax.swing.JMenuItem jMenuItemAbout = new javax.swing.JMenuItem("About");

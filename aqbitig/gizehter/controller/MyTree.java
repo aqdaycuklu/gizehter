@@ -30,7 +30,7 @@ public class MyTree extends javax.swing.JTree {
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    aqbitig.gizehter.view.PopupMenu popupMenu = new aqbitig.gizehter.view.PopupMenu((javax.swing.JTree) e.getComponent(), e.getX(), e.getY());
+                    aqbitig.gizehter.view.menu.MenuPopup popupMenu = new aqbitig.gizehter.view.menu.MenuPopup((javax.swing.JTree) e.getComponent(), e.getX(), e.getY());
                 } else {
                     abstractTree.leafSelected();
                 }

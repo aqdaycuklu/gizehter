@@ -5,10 +5,7 @@
  */
 package aqbitig.gizehter.view;
 
-import aqbitig.gizehter.controller.ImplementsMenuBar;
-import aqbitig.gizehter.controller.InterfaceFileChooser;
-import aqbitig.gizehter.controller.InterfaceLogin;
-import aqbitig.gizehter.controller.InterfaceMenuBar;
+import aqbitig.gizehter.controller.implement.ImplementsMenuBar;
 import aqbitig.gizehter.controller.MyTreeModel;
 import aqbitig.lib.basic.T;
 import components.MyInternalFrame;
@@ -18,6 +15,9 @@ import java.io.File;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import aqbitig.gizehter.controller.bridge.InterfaceFileChooser;
+import aqbitig.gizehter.controller.bridge.InterfaceLogin;
+import aqbitig.gizehter.controller.bridge.InterfaceMenuBar;
 
 /**
  *
