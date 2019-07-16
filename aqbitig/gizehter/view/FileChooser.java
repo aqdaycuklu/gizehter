@@ -4,7 +4,6 @@ import aqbitig.lib.basic.T;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import aqbitig.gizehter.controller.bridge.InterfaceFileChooser;
 

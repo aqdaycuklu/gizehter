@@ -82,7 +82,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {&#xa;    public void focusGained(java.awt.event.FocusEvent evt) {&#xa;        splitPane.getSplitPane().getLeftComponent().setEnabled(false);&#xa;    }&#xa;&#xa;    public void focusLost(java.awt.event.FocusEvent evt) {&#xa;        save();&#xa;    }&#xa;&#xa;});"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {&#xa;    public void focusGained(java.awt.event.FocusEvent evt) {&#xa;        da();&#xa;    }&#xa;&#xa;    public void focusLost(java.awt.event.FocusEvent evt) {&#xa;        save();&#xa;    }&#xa;&#xa;});"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelLogin">

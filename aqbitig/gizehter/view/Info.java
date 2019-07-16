@@ -51,6 +51,9 @@ public class Info extends javax.swing.JPanel {
         this.node.setUrl(jTextFieldUrl.getText());
         this.node.setComment(jTextPaneComment.getText());
     }
+    
+    private void da(){
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,7 +80,7 @@ public class Info extends javax.swing.JPanel {
         jTextFieldLogin.setText("");
         jTextFieldLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                splitPane.getSplitPane().getLeftComponent().setEnabled(false);
+                da();
             }
 
             public void focusLost(java.awt.event.FocusEvent evt) {

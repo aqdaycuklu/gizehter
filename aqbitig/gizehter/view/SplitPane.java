@@ -66,7 +66,7 @@ public class SplitPane extends javax.swing.JPanel {
         jSplitPane1 = new javax.swing.JSplitPane();
         info = new aqbitig.gizehter.view.Info(this);
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree = new aqbitig.gizehter.controller.MyTree(abstractTree);
+        jTree = new aqbitig.gizehter.view.Tree(abstractTree);
 
         jSplitPane1.setDividerLocation(395);
         jSplitPane1.setDividerSize(10);
@@ -109,6 +109,10 @@ public class SplitPane extends javax.swing.JPanel {
 
     public javax.swing.JSplitPane getSplitPane() {
         return this.jSplitPane1;
+    }
+
+    public javax.swing.JScrollPane getjScrollPane() {
+        return jScrollPane1;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aqbitig.gizehter.controller.implement;
+package aqbitig.gizehter.controller;
 
 import aqbitig.gizehter.controller.MyTreeModel;
 import aqbitig.gizehter.view.Info;
@@ -16,13 +16,13 @@ import aqbitig.gizehter.controller.bridge.InterfaceFileChooser;
  *
  * @author aqdaycuklu
  */
-public class ImplementsMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMenuBar {
+public class MyMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMenuBar {
 
     aqbitig.gizehter.view.Main main;
     aqbitig.gizehter.controller.MyTreeModel myTreeModel;
     javax.swing.JTree jTree;
 
-    public ImplementsMenuBar(aqbitig.gizehter.view.Main main) {
+    public MyMenuBar(aqbitig.gizehter.view.Main main) {
         this.main = main;
     }
 

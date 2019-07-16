@@ -1,17 +1,21 @@
-package aqbitig.gizehter.controller;
+package aqbitig.gizehter.view;
+
+import aqbitig.gizehter.controller.MyTransferHandler;
+import aqbitig.gizehter.controller.MyTreeModel;
+import aqbitig.gizehter.controller.MyTreeModelListener;
 
 /**
  * gizehter = giz(li) + anahtar
  *
  * @author aqdaycuklu
  */
-public class MyTree extends javax.swing.JTree {
+public class Tree extends javax.swing.JTree {
 
     /**
      *
      * @param abstractTree
      */
-    public MyTree(aqbitig.gizehter.controller.AbstractTree abstractTree) {
+    public Tree(aqbitig.gizehter.controller.AbstractTree abstractTree) {
 
         MyTreeModel myTreeModel = new MyTreeModel(abstractTree);
         myTreeModel.addTreeModelListener(new MyTreeModelListener());

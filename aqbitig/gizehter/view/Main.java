@@ -5,19 +5,9 @@
  */
 package aqbitig.gizehter.view;
 
-import aqbitig.gizehter.controller.implement.ImplementsMenuBar;
-import aqbitig.gizehter.controller.MyTreeModel;
-import aqbitig.lib.basic.T;
-import components.MyInternalFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import aqbitig.gizehter.controller.bridge.InterfaceFileChooser;
-import aqbitig.gizehter.controller.bridge.InterfaceLogin;
-import aqbitig.gizehter.controller.bridge.InterfaceMenuBar;
 
 /**
  *
@@ -80,7 +70,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void menuBar() {
-        this.menuBar = new aqbitig.gizehter.view.MenuBar(new ImplementsMenuBar(this));
+        this.menuBar = new aqbitig.gizehter.view.MenuBar(new aqbitig.gizehter.controller.MyMenuBar(this));
         setJMenuBar(menuBar);
         menuBar.menu(false);
 
