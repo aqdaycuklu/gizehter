@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aqbitig.gizehter.view.menu;
+package aqbitig.gizehter.controller.bridge;
 
 /**
  *
  * @author aqdaycuklu
  */
-public interface MenuFrameInterface {
+public interface InterfaceMenuFrame {
 
     public void fileNew();
     public void fileOpen();

@@ -17,7 +17,8 @@ public class Main extends javax.swing.JFrame {
 
     public javax.swing.JDesktopPane desktopPane;
 
-    public aqbitig.gizehter.view.MenuBar menuBar;
+    public aqbitig.gizehter.view.menu.MenuBar menuBar;
+    public aqbitig.gizehter.controller.MyMenuBar myMenuBar;
 
     public aqbitig.gizehter.view.SplitPane splitPane;
 
@@ -70,7 +71,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     private void menuBar() {
-        this.menuBar = new aqbitig.gizehter.view.MenuBar(new aqbitig.gizehter.controller.MyMenuBar(this));
+        this.myMenuBar = new aqbitig.gizehter.controller.MyMenuBar(this);
+        this.menuBar = new aqbitig.gizehter.view.menu.MenuBar(this.myMenuBar);
         setJMenuBar(menuBar);
         menuBar.menu(false);
 

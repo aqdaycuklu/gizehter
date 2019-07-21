@@ -12,13 +12,15 @@ import aqbitig.gizehter.controller.bridge.InterfaceFileChooser;
  *
  * @author aqdaycuklu
  */
-public class FileChooser extends javax.swing.JPanel {
+public class FileChooser extends javax.swing.JFileChooser {
 
     InterfaceFileChooser interfaceFileChooser;
     String mode;
 
     /**
      * Creates new form NewDatabase
+     * @param mode
+     * @param interfaceFileChooser
      */
     public FileChooser(String mode, InterfaceFileChooser interfaceFileChooser) {
         this.interfaceFileChooser = interfaceFileChooser;

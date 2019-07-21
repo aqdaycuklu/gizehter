@@ -18,9 +18,10 @@ import aqbitig.gizehter.controller.bridge.InterfaceFileChooser;
  */
 public class MyMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMenuBar {
 
-    aqbitig.gizehter.view.Main main;
-    aqbitig.gizehter.controller.MyTreeModel myTreeModel;
-    javax.swing.JTree jTree;
+    public aqbitig.gizehter.controller.MyTreeModel myTreeModel;
+    public aqbitig.gizehter.view.Main main;
+    public aqbitig.gizehter.view.Info info;
+    public aqbitig.gizehter.view.Tree tree;
 
     public MyMenuBar(aqbitig.gizehter.view.Main main) {
         this.main = main;
@@ -28,104 +29,12 @@ public class MyMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMe
 
     @Override
     public void fileNew() {
-        aqbitig.gizehter.view.InternalFrame internalFrame = new aqbitig.gizehter.view.InternalFrame("New qb file");
-        internalFrame.add(new aqbitig.gizehter.view.FileChooser("new", new InterfaceFileChooser() {
-            @Override
-            public void getFile(File f) {
-                T.o();
-
-                /* LOGIN */
-                aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login((char[] password) -> {
-                    T.o(password);
-
-                    /*  INTERNEL FRAME TITLE */
-                    internalFrame.setTitle("Gizehter: " + f.getPath());
-
-                    /* SPLIT PANE + TREE */
-                    aqbitig.gizehter.view.SplitPane sp = new aqbitig.gizehter.view.SplitPane("new", f, new String(password));
-                    sp.setVisible(true);
-                    internalFrame.getContentPane().removeAll();
-                    internalFrame.add(sp);
-                    /* SPLIT PANE + TREE */
-
- /* GET TREEMODEL */
-                    main.splitPane = sp;
-                    jTree = sp.getjTree();
-                    myTreeModel = (MyTreeModel) sp.getjTree().getModel();
-
-                });
-                login.setVisible(true);
-                internalFrame.getContentPane().removeAll();
-                internalFrame.add(login);
-                main.pack();
-                main.menuBar.menu(true);
-
-                /* LOGIN. */
-            }
-
-            @Override
-            public void canceled() {
-
-            }
-        })
-        );
-        internalFrame.setVisible(true);
-        main.desktopPane.add(internalFrame);
+        main.desktopPane.add(new aqbitig.gizehter.view.InternalFrame(main, "new"));
     }
 
     @Override
     public void fileOpen() {
-        /* INTERNAL FRAME */
-        aqbitig.gizehter.view.InternalFrame internalFrame = new aqbitig.gizehter.view.InternalFrame("open qb file");
-
-        /* FILE CHOOSER */
-        aqbitig.gizehter.view.FileChooser fileChooser = new aqbitig.gizehter.view.FileChooser("open", new InterfaceFileChooser() {
-            @Override
-            public void getFile(File f) {
-                aqbitig.lib.io.FileManager.backup(f.getPath());
-
-                /* LOGIN */
-                aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login((char[] password) -> {
-                    T.o(password);
-                    T.o(new String(password));
-                    if (!aqbitig.lib.db.AqbSqlite.checkPassword(f.getPath(), new String(password))) {
-                        JOptionPane.showMessageDialog(null, "Password not correct.");
-                    } else {
-                        /*  INTERNEL FRAME TITLE */
-                        internalFrame.setTitle("Gizehter: " + f.getPath());
-
-                        /* SPLIT PANE + TREE */
-                        aqbitig.gizehter.view.SplitPane sp = new aqbitig.gizehter.view.SplitPane("open", f, new String(password));
-                        ((MyTreeModel) sp.getjTree().getModel()).populateTree();
-                        sp.setVisible(true);
-                        internalFrame.getContentPane().removeAll();
-                        internalFrame.add(sp);
-                        /* SPLIT PANE + TREE */
-
- /* GET TREEMODEL */
-                        main.splitPane = sp;
-                        jTree = sp.getjTree();
-                        myTreeModel = (MyTreeModel) sp.getjTree().getModel();
-
-                    }
-                });
-                login.setVisible(true);
-                internalFrame.getContentPane().removeAll();
-                internalFrame.add(login);
-                main.pack();
-                main.menuBar.menu(true);
-                /* LOGIN. */
-            }
-
-            @Override
-            public void canceled() {
-
-            }
-        });
-        internalFrame.add(fileChooser);
-        internalFrame.setVisible(true);
-        main.desktopPane.add(internalFrame);
-        /* FILE CHOOSER */
+        main.desktopPane.add(new aqbitig.gizehter.view.InternalFrame(main, "open"));
     }
 
     @Override
@@ -149,17 +58,17 @@ public class MyMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMe
 
     @Override
     public void treeAddBranch() {
-        this.myTreeModel.addBranch(this.jTree.getSelectionPath());
+        this.myTreeModel.addBranch(this.tree.getSelectionPath());
     }
 
     @Override
     public void treeAddLeaf() {
-        this.myTreeModel.addLeaf(this.jTree.getSelectionPath());
+        this.myTreeModel.addLeaf(this.tree.getSelectionPath());
     }
 
     @Override
     public void treeRemove() {
-        this.myTreeModel.remove(this.jTree.getSelectionPath());
+        this.myTreeModel.remove(this.tree.getSelectionPath());
     }
 
     @Override
@@ -183,4 +92,10 @@ public class MyMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMe
         JOptionPane.showMessageDialog(null, licenses);
     }
 
+    public void setInternalFrame(aqbitig.gizehter.view.SplitPane splitPane) {
+        this.main.menuBar.menu(true);
+        this.main.myMenuBar.info = splitPane.getInfo();
+        this.main.myMenuBar.tree = splitPane.getTree();
+        this.main.myMenuBar.myTreeModel = ((MyTreeModel) splitPane.getTree().getModel());
+    }
 }

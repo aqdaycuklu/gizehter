@@ -17,6 +17,7 @@ public class Info extends javax.swing.JPanel {
 
     /**
      * Creates new form input
+     * @param splitPane
      */
     public Info(aqbitig.gizehter.view.SplitPane splitPane) {
         this.splitPane = splitPane;
