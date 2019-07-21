@@ -8,7 +8,10 @@ package aqbitig.gizehter.view;
 import aqbitig.gizehter.controller.MyTreeModel;
 import aqbitig.gizehter.controller.bridge.InterfaceFileChooser;
 import aqbitig.lib.basic.T;
+import java.beans.PropertyVetoException;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
@@ -21,75 +24,49 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
     public java.io.File file;
     public String filePath;
-    public String mode = "";
+    //public String mode = "";
     public String password = "";
 
     public aqbitig.gizehter.view.Main main;
     public aqbitig.gizehter.view.InternalFrame internalFrame = this;
     public aqbitig.gizehter.view.SplitPane splitPane;
 
-    private static int openFrameCount = 0;
     private final int xOffset = 25, yOffset = 25;
 
-    public InternalFrame(aqbitig.gizehter.view.Main main, String title) {
-        super(title + (++openFrameCount),
+    public InternalFrame(aqbitig.gizehter.view.Main main, String mode) {
+        super(mode + " " + main.desktopPane.getComponentCount(),
                 true, //resizable
                 true, //closable
                 true, //maximizable
                 true);//iconifiable
 
-        if (title == "new") {
-            title = "New qb file";
-            nextPageNew();
-        } else if (title == "open") {
-            title = "Open qb file";
-            nextPageOpen();
-        }
+        nextPage(mode);
 
         //...Create the GUI and put it in the window...
         //...Then set the window size or call pack...
         setSize(500, 350);
 
         //Set the window's location.
-        setLocation(xOffset * openFrameCount, yOffset * openFrameCount);
+        int componentCount = main.desktopPane.getComponentCount();
+        setLocation(xOffset * componentCount, yOffset * componentCount);
 
         this.main = main;
         addInternalFrameListener(new aqbitig.gizehter.controller.MyInternalFrameListener(this));
-    }
 
-    public void nextPageNew() {
-
-        add(new aqbitig.gizehter.view.FileChooser("new", new InterfaceFileChooser() {
-            @Override
-            public void getFile(File f) {
-                T.o();
-
-                aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login(internalFrame, "new", f);
-                login.setVisible(true);
-                internalFrame.getContentPane().removeAll();
-                internalFrame.add(login);
-            }
-
-            @Override
-            public void canceled() {
-
-            }
-        })
-        );
         setVisible(true);
-        //     main.desktopPane.add(internalFrame);
     }
 
-    public void nextPageOpen() {
-        add(new aqbitig.gizehter.view.FileChooser("open", new InterfaceFileChooser() {
+    public void nextPage(String mode) {
+        T.o(mode);
+        add(new aqbitig.gizehter.view.FileChooser(mode, new InterfaceFileChooser() {
             @Override
             public void getFile(File f) {
-                T.o();
+                T.o(mode);
 
-                aqbitig.lib.io.FileManager.backup(f.getPath());
-
-                aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login(internalFrame, "open", f);
-                login.setVisible(true);
+                if (mode.equalsIgnoreCase("open")) {
+                    aqbitig.lib.io.FileManager.backup(f.getPath());
+                }
+                aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login(internalFrame, mode, f);
                 internalFrame.getContentPane().removeAll();
                 internalFrame.add(login);
                 internalFrame.pack();
@@ -99,9 +76,9 @@ public class InternalFrame extends javax.swing.JInternalFrame {
             public void canceled() {
 
             }
-        })
-        );
-        setVisible(true);
+        }));
+        internalFrame.pack();
+
     }
 
     public File getFile() {
@@ -113,7 +90,8 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     }
 
     public String getMode() {
-        return mode;
+        //      return mode;
+        return null;
     }
 
     public String getPassword() {
@@ -133,7 +111,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
     }
 
     public void setMode(String mode) {
-        this.mode = mode;
+//        this.mode = mode;
     }
 
     public void setPassword(String password) {

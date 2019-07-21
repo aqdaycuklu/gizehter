@@ -29,11 +29,13 @@ public class MyMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMe
 
     @Override
     public void fileNew() {
+        T.o();
         main.desktopPane.add(new aqbitig.gizehter.view.InternalFrame(main, "new"));
     }
 
     @Override
     public void fileOpen() {
+        T.o();
         main.desktopPane.add(new aqbitig.gizehter.view.InternalFrame(main, "open"));
     }
 

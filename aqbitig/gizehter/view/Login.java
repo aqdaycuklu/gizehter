@@ -4,6 +4,7 @@ import aqbitig.gizehter.controller.MyTreeModel;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import aqbitig.gizehter.controller.bridge.InterfaceLogin;
+import aqbitig.lib.basic.T;
 import java.io.File;
 
 /**
@@ -27,7 +28,9 @@ public class Login extends javax.swing.JPanel {
         this.internalFrame = internalFrame;
         this.f = f;
         this.mode = mode;
+        T.o(mode);
         initComponents();
+        setVisible(true);
     }
 
     /**
@@ -99,40 +102,26 @@ public class Login extends javax.swing.JPanel {
 
     private void nextPage(String password) {
 
-        if (this.mode == "new") {
-
-            /*  INTERNEL FRAME TITLE */
-            internalFrame.setTitle("Gizehter: " + f.getPath());
-
-            /* SPLIT PANE + TREE */
-            aqbitig.gizehter.view.SplitPane sp = new aqbitig.gizehter.view.SplitPane("new", f, new String(password));
-            sp.setVisible(true);
-            internalFrame.getContentPane().removeAll();
-            internalFrame.add(sp);
-            /* SPLIT PANE + TREE */
-
-            internalFrame.setSplitPane(sp);
-            
-        } else if (this.mode == "open") {
-
+        if (this.mode == "open") {
             if (!aqbitig.lib.db.AqbSqlite.checkPassword(f.getPath(), password)) {
                 JOptionPane.showMessageDialog(null, "Password not correct.");
-            } else {
-                /*  INTERNEL FRAME TITLE */
-                internalFrame.setTitle("Gizehter: " + f.getPath());
-
-                /* SPLIT PANE + TREE */
-                aqbitig.gizehter.view.SplitPane sp = new aqbitig.gizehter.view.SplitPane("open", f, password);
-                sp.setVisible(true);
-                internalFrame.getContentPane().removeAll();
-                internalFrame.add(sp);
-                ((MyTreeModel) sp.getTree().getModel()).populateTree();
-                /* SPLIT PANE + TREE */
-
-                internalFrame.setSplitPane(sp);
-
+                return;
             }
         }
+
+        /*  INTERNEL FRAME TITLE */
+        internalFrame.setTitle("Gizehter: " + f.getPath());
+
+        /* SPLIT PANE + TREE */
+        aqbitig.gizehter.view.SplitPane sp = new aqbitig.gizehter.view.SplitPane(this.mode, f, new String(password));
+        sp.setVisible(true);
+        internalFrame.getContentPane().removeAll();
+        internalFrame.add(sp);
+        /* SPLIT PANE + TREE */
+
+        ((MyTreeModel) sp.getTree().getModel()).populateTree();
+
+        internalFrame.setSplitPane(sp);
 
     }
 
