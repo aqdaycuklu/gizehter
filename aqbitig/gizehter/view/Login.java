@@ -30,6 +30,11 @@ public class Login extends javax.swing.JPanel {
         this.mode = mode;
         T.o(mode);
         initComponents();
+
+        if (this.mode == "open") {
+            jPasswordField2.setVisible(false);
+        }
+
         setVisible(true);
     }
 
@@ -127,6 +132,11 @@ public class Login extends javax.swing.JPanel {
 
     private void jButtonPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordActionPerformed
         // TODO add your handling code here:
+
+        if (this.mode == "open") {
+            nextPage(new String(jPasswordField1.getPassword()));
+            return;
+        }
 
         if (Arrays.toString(jPasswordField1.getPassword()).equals(Arrays.toString(jPasswordField2.getPassword()))) {
             nextPage(new String(jPasswordField1.getPassword()));
