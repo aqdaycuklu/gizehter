@@ -25,6 +25,9 @@ public class SplitPane extends javax.swing.JSplitPane {
                 info.clear();
 
                 TreePath path = tree.getSelectionPath();
+                if (path == null) {
+                    return;
+                }
                 System.out.println(path.toString());
 
                 TreeNode node = (TreeNode) path.getLastPathComponent();

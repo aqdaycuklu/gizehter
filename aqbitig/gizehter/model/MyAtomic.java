@@ -9,6 +9,8 @@ public class MyAtomic {
 
     // ATOMIC DATA
     private String path, login, password, url, comment;
+    
+    public static final char NODE_SEPARATOR = '→';
 
     // SHOW
     boolean leaf;
@@ -116,7 +118,7 @@ public class MyAtomic {
     @Override
     public String toString() {
 
-        return this.path.substring(this.path.lastIndexOf(".") + 1);
+        return this.path.substring(this.path.lastIndexOf(MyAtomic.NODE_SEPARATOR) + 1);
     }
 
 }

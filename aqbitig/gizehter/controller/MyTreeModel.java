@@ -76,8 +76,6 @@ public class MyTreeModel implements TreeModel {
     public void setAbstractTree(AbstractTree abstractTree) {
         this.abstractTree = abstractTree;
     }
-    
-    
 
     /* class attributes. */
 
@@ -579,15 +577,15 @@ public class MyTreeModel implements TreeModel {
     public void populateTree() {
         List<MyAtomic> myAtomicSet = abstractTree.load();
         for (MyAtomic myAtomic : myAtomicSet) {
-            T.o("\n");
+            T.o("\n\nnew Atomic");
             T.o("myAtomic.getpath() " + myAtomic.getPath());
             DefaultMutableTreeNode parentNode = this.root;
 
-            String[] path = myAtomic.getPath().split("[.]");
+            String[] path = myAtomic.getPath().split("[" + MyAtomic.NODE_SEPARATOR + "]");
             T.o("path length: " + path.length);
 
             for (int i = 0; i < path.length; i++) {
-
+                T.o("\n [" + i + "]-> path part: " + path[i]);
                 String nodePart = path[i];
                 boolean isNode = false;
 
@@ -663,13 +661,13 @@ public class MyTreeModel implements TreeModel {
 
         T.o("node level:" + node.getLevel());
         for (TreeNode n : node.getPath()) {
-            path += "." + n.toString();
+            path += MyAtomic.NODE_SEPARATOR + n.toString();
         }
         path = path.substring(1);
-        T.o("remove dot(.) :" + path);
-        T.o("get prefix: " + path.substring(0, ("root.").length()));
-        T.o("path skip: " + path.substring("root.".length()));
-        path = (path.substring(0, ("root.").length()).equals("root.") ? path.substring("root.".length()) : path);
+        T.o("remove dot(" + MyAtomic.NODE_SEPARATOR + ") :" + path);
+        T.o("get prefix: " + path.substring(0, ("root" + MyAtomic.NODE_SEPARATOR).length()));
+        T.o("path skip: " + path.substring(("root" + MyAtomic.NODE_SEPARATOR).length()));
+        path = (path.substring(0, ("root" + MyAtomic.NODE_SEPARATOR).length()).equals("root" + MyAtomic.NODE_SEPARATOR) ? path.substring(("root" + MyAtomic.NODE_SEPARATOR).length()) : path);
         T.o("cut prefix: " + path);
         return path;
     }
