@@ -118,7 +118,7 @@ public class Login extends javax.swing.JPanel {
         internalFrame.setTitle("Gizehter: " + f.getPath());
 
         /* SPLIT PANE + TREE */
-        aqbitig.gizehter.view.SplitPane sp = new aqbitig.gizehter.view.SplitPane(this.mode, f, new String(password));
+        aqbitig.gizehter.view.SplitPane sp = new aqbitig.gizehter.view.SplitPane(this.mode, f, password);
         sp.setVisible(true);
         internalFrame.getContentPane().removeAll();
         internalFrame.add(sp);

@@ -48,13 +48,11 @@ public class Info extends javax.swing.JPanel {
 
     public void save() {
         this.node.setLogin(jTextFieldLogin.getText());
-        this.node.setPassword(jPasswordFieldPassword.getText());
+        this.node.setPassword(new String(jPasswordFieldPassword.getPassword()));
         this.node.setUrl(jTextFieldUrl.getText());
         this.node.setComment(jTextPaneComment.getText());
     }
     
-    private void da(){
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +78,11 @@ public class Info extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(230, 350));
 
         jTextFieldLogin.setText("");
+        jTextFieldLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldLoginKeyPressed(evt);
+            }
+        });
 
         jLabelLogin.setText("Login");
 
@@ -88,6 +91,11 @@ public class Info extends javax.swing.JPanel {
         jLabelUrl.setText("Url");
 
         jTextFieldUrl.setText("");
+        jTextFieldUrl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldUrlKeyPressed(evt);
+            }
+        });
 
         jPasswordFieldPassword.setText("");
         jPasswordFieldPassword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -98,7 +106,17 @@ public class Info extends javax.swing.JPanel {
                 jPasswordFieldPasswordFocusLost(evt);
             }
         });
+        jPasswordFieldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordFieldPasswordKeyPressed(evt);
+            }
+        });
 
+        jTextPaneComment.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextPaneCommentKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextPaneComment);
 
         jLabel1.setText("");
@@ -175,7 +193,30 @@ public class Info extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         save();
+        jButton1.setForeground(java.awt.Color.BLACK);
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLoginKeyPressed
+        // TODO add your handling code here:
+        jButton1.setForeground(java.awt.Color.RED);
+
+    }//GEN-LAST:event_jTextFieldLoginKeyPressed
+
+    private void jPasswordFieldPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordKeyPressed
+        // TODO add your handling code here:
+        jButton1.setForeground(java.awt.Color.RED);
+    }//GEN-LAST:event_jPasswordFieldPasswordKeyPressed
+
+    private void jTextFieldUrlKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUrlKeyPressed
+        // TODO add your handling code here:
+        jButton1.setForeground(java.awt.Color.RED);
+    }//GEN-LAST:event_jTextFieldUrlKeyPressed
+
+    private void jTextPaneCommentKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPaneCommentKeyPressed
+        // TODO add your handling code here:
+        jButton1.setForeground(java.awt.Color.RED);        
+    }//GEN-LAST:event_jTextPaneCommentKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

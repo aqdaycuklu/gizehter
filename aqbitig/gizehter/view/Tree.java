@@ -16,7 +16,10 @@ public class Tree extends javax.swing.JTree {
      * @param abstractTree
      */
     public Tree(aqbitig.gizehter.controller.AbstractTree abstractTree) {
+        init(abstractTree);
+    }
 
+    private void init(aqbitig.gizehter.controller.AbstractTree abstractTree) {
         addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
@@ -42,7 +45,6 @@ public class Tree extends javax.swing.JTree {
         setShowsRootHandles(true);
         setTransferHandler(new MyTransferHandler());
         setVisible(true);
-
     }
 
 }

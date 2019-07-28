@@ -42,6 +42,7 @@ public class MyMenuBar implements aqbitig.gizehter.controller.bridge.InterfaceMe
     @Override
     public void fileSave() {
         this.myTreeModel.save();
+        JOptionPane.showMessageDialog(null, "saved");
     }
 
     @Override
