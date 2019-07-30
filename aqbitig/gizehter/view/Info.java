@@ -2,6 +2,7 @@ package aqbitig.gizehter.view;
 
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.lib.basic.C;
+import javax.swing.JButton;
 
 /**
  * gizehter = giz(li) + anahtar
@@ -10,17 +11,12 @@ import aqbitig.lib.basic.C;
  */
 public class Info extends javax.swing.JPanel {
 
-    aqbitig.gizehter.view.SplitPane splitPane;
     MyAtomic node;
     char passwordChar;
     
 
-    /**
-     * Creates new form input
-     * @param splitPane
-     */
-    public Info(aqbitig.gizehter.view.SplitPane splitPane) {
-        this.splitPane = splitPane;
+    public Info(JButton jButton) {
+        jButton1 = jButton;
         initComponents();
         this.passwordChar = jPasswordFieldPassword.getEchoChar();
     }
@@ -73,7 +69,6 @@ public class Info extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextPaneComment = new javax.swing.JTextPane();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(230, 350));
 
@@ -121,13 +116,6 @@ public class Info extends javax.swing.JPanel {
 
         jLabel1.setText("");
 
-        jButton1.setText("hold");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,8 +137,7 @@ public class Info extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addGap(53, 53, 53)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -173,10 +160,8 @@ public class Info extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,13 +174,6 @@ public class Info extends javax.swing.JPanel {
         // TODO add your handling code here:
         jPasswordFieldPassword.setEchoChar(this.passwordChar);
     }//GEN-LAST:event_jPasswordFieldPasswordFocusLost
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        save();
-        jButton1.setForeground(java.awt.Color.BLACK);
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextFieldLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldLoginKeyPressed
         // TODO add your handling code here:
@@ -219,8 +197,8 @@ public class Info extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextPaneCommentKeyPressed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelLogin;
     private javax.swing.JLabel jLabelPassword;

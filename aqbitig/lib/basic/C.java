@@ -90,4 +90,16 @@ public class C {
         }
         return result.toString();
     }
+
+    public static String b64encode(byte[] bytes) {
+        Base64.Encoder encoder = Base64.getUrlEncoder();
+        // Encoding URL  
+        return encoder.encodeToString(bytes);
+    }
+
+    public static byte[] b64decode(String str) {
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        // Decoding URl  
+        return decoder.decode(str);
+    }
 }

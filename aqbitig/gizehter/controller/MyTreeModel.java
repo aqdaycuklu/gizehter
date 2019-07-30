@@ -440,7 +440,7 @@ public class MyTreeModel implements TreeModel {
      */
     public DefaultMutableTreeNode addLeaf(TreePath parentPath) {
         DefaultMutableTreeNode parentNode;
-        MyAtomic myAtomic = new MyAtomic("project", "login", "password", "url", "comment");
+        MyAtomic myAtomic = new MyAtomic("project", "login", "password", "url", "comment", null);
 
         if (parentPath == null) {
             parentNode = root;
@@ -636,7 +636,7 @@ public class MyTreeModel implements TreeModel {
                 //System.out.println(child.toString());
                 MyAtomic myAtomic = (MyAtomic) child.getUserObject();
                 String sql = "INSERT OR IGNORE INTO `atomic`"
-                        + " (`level`, `index`, `path`, `login`, `password`, `url`, `comment`)"
+                        + " (`level`, `index`, `path`, `login`, `password`, `url`, `comment`, `image`)"
                         + " VALUES"
                         + " ("
                         + " '" + child.getLevel() + "',"
@@ -645,7 +645,8 @@ public class MyTreeModel implements TreeModel {
                         + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getLogin().toString()) + "',"
                         + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getPassword().toString()) + "',"
                         + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getUrl().toString()) + "',"
-                        + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getComment().toString()) + "'"
+                        + " '" + C.encrypt(abstractTree.getPassword(), myAtomic.getComment().toString()) + "',"
+                        + " '" + C.b64encode(myAtomic.getImage()) + "'"
                         + ");";
                 T.o("sql: " + sql);
                 abstractTree.insert(sql);

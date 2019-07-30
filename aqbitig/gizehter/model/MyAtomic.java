@@ -9,6 +9,7 @@ public class MyAtomic {
 
     // ATOMIC DATA
     private String path, login, password, url, comment;
+    private byte[] image;
     
     public static final char NODE_SEPARATOR = '→';
 
@@ -33,14 +34,16 @@ public class MyAtomic {
         this.password = "";
         this.url = "";
         this.comment = "";
+        this.image = null;
     }
 
-    public MyAtomic(String path, String login, String password, String url, String comment) {
+    public MyAtomic(String path, String login, String password, String url, String comment, byte[] image) {
         this.path = path;
         this.login = login;
         this.password = password;
         this.url = url;
         this.comment = comment;
+        this.image = image;
     }
 
     public boolean isLeaf() {
@@ -113,6 +116,14 @@ public class MyAtomic {
 
     public void setDegree(int degree) {
         this.degree += degree;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

@@ -137,7 +137,8 @@ public class AqbSqlite {
                         C.decrypt(this.password, rs.getString("login")),
                         C.decrypt(this.password, rs.getString("password")),
                         C.decrypt(this.password, rs.getString("url")),
-                        C.decrypt(this.password, rs.getString("comment"))
+                        C.decrypt(this.password, rs.getString("comment")),
+                        C.b64decode(rs.getString("image"))
                 );
                 myAtomicSet.add(myAtomic);
             }
@@ -184,7 +185,8 @@ public class AqbSqlite {
                     + "	`login` TEXT,"
                     + "	`password` TEXT,"
                     + "	`url` TEXT,"
-                    + "	`comment` TEXT"
+                    + "	`comment` TEXT,"
+                    + " `image`	TEXT"
                     + ");";
             System.out.println(statement.executeUpdate(sql));
 

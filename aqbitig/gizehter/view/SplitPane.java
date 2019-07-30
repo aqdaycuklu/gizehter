@@ -3,6 +3,9 @@ package aqbitig.gizehter.view;
 import aqbitig.gizehter.controller.AbstractTree;
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.lib.basic.T;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -38,10 +41,12 @@ public class SplitPane extends javax.swing.JSplitPane {
                     MyAtomic m = (MyAtomic) j.getUserObject();
                     T.o(m.getLogin());
                     info.setNode(m);
+                    image.setNode(m);
                 } else if (j.isLeaf() && !j.getAllowsChildren()) {
                     MyAtomic m = new MyAtomic();
                     j.setUserObject(m);
                     info.setNode(m);
+                    image.setNode(m);
                 }
 
             }
@@ -74,8 +79,24 @@ public class SplitPane extends javax.swing.JSplitPane {
 
         setLeftComponent(jScrollPane1);
 
-        info = new aqbitig.gizehter.view.Info(this);
-        jScrollPane2.setViewportView(info);
+        JPanel jp = new JPanel();
+        jp.setLayout(new BoxLayout(jp, BoxLayout.PAGE_AXIS));
+
+        JButton jButton = new JButton("Hold");
+        jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                info.save();
+                image.save();
+                jButton.setForeground(java.awt.Color.BLACK);
+            }
+        });
+        info = new aqbitig.gizehter.view.Info(jButton);
+        image = new aqbitig.gizehter.view.Image();
+        tabbedPane = new aqbitig.gizehter.view.TabbedPane(info, image);
+        jp.add(tabbedPane);
+        jp.add(jButton);
+
+        jScrollPane2.setViewportView(jp);
 
         setRightComponent(jScrollPane2);
 
@@ -106,9 +127,11 @@ public class SplitPane extends javax.swing.JSplitPane {
     }
 
     // CUSTOM ATTRIBUTES
-    private aqbitig.gizehter.view.Info info;
+    private javax.swing.JScrollPane jScrollPane1;
     private aqbitig.gizehter.view.Tree tree;
 
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private aqbitig.gizehter.view.Info info;
+    private aqbitig.gizehter.view.Image image;
+    private aqbitig.gizehter.view.TabbedPane tabbedPane;
 }
