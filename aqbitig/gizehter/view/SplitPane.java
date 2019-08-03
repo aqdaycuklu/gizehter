@@ -26,6 +26,7 @@ public class SplitPane extends javax.swing.JSplitPane {
             @Override
             public void leafSelected() {
                 info.clear();
+                image.clear();
 
                 TreePath path = tree.getSelectionPath();
                 if (path == null) {
@@ -59,7 +60,7 @@ public class SplitPane extends javax.swing.JSplitPane {
         initComponents();
         T.o("sp width: " + getSize().getWidth());
         setSize(500, 350);
-        setDividerLocation(245);
+        setDividerLocation(0.5);
 
     }
 
@@ -91,7 +92,7 @@ public class SplitPane extends javax.swing.JSplitPane {
             }
         });
         info = new aqbitig.gizehter.view.Info(jButton);
-        image = new aqbitig.gizehter.view.Image();
+        image = new aqbitig.gizehter.view.Image(jButton);
         tabbedPane = new aqbitig.gizehter.view.TabbedPane(info, image);
         jp.add(tabbedPane);
         jp.add(jButton);

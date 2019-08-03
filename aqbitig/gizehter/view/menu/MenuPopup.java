@@ -5,6 +5,12 @@
  */
 package aqbitig.gizehter.view.menu;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author aqdaycuklu
@@ -17,8 +23,17 @@ public class MenuPopup extends javax.swing.JPopupMenu {
 
         javax.swing.JMenuItem jMenuItemRename = new javax.swing.JMenuItem("Rename");
         jMenuItemRename.addActionListener((java.awt.event.ActionEvent evt) -> {
+
             jTree.requestFocusInWindow();
             jTree.setInvokesStopCellEditing(true);
+            try {
+                Robot r = new Robot();
+                r.keyPress(KeyEvent.VK_F2);  // VK_WINDOWS key still pressed
+                r.keyRelease(KeyEvent.VK_F2);
+            } catch (AWTException ex) {
+                Logger.getLogger(MenuPopup.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         });
         this.add(jMenuItemRename);
 

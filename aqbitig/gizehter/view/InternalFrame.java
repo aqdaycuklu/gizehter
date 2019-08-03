@@ -42,18 +42,25 @@ public class InternalFrame extends javax.swing.JInternalFrame {
 
         nextPage(mode);
 
-        //...Create the GUI and put it in the window...
-        //...Then set the window size or call pack...
-        setSize(500, 350);
-
-        //Set the window's location.
-        int componentCount = main.desktopPane.getComponentCount();
-        setLocation(xOffset * componentCount, yOffset * componentCount);
-
         this.main = main;
         addInternalFrameListener(new aqbitig.gizehter.controller.MyInternalFrameListener(this));
 
+        setPosition();
         setVisible(true);
+    }
+
+    public void setPosition() {
+        setSize((int) (main.getWidth() / 1.33333), (int) (main.getHeight() / 1.33333));
+        int componentCount = main.desktopPane.getComponentCount();
+        setLocation(xOffset * componentCount, yOffset * componentCount);
+    }
+
+    public void setPositionCenter() {
+        //setSize((int) (main.getWidth() / 1.33333), (int) (main.getHeight() / 1.33333));
+        setLocation(
+                (int) ((main.getWidth() / 2)),
+                (int) ((main.getHeight() / 4))
+        );
     }
 
     public void nextPage(String mode) {
@@ -66,7 +73,7 @@ public class InternalFrame extends javax.swing.JInternalFrame {
                 if (mode.equalsIgnoreCase("open")) {
                     aqbitig.lib.io.FileManager.backup(f.getPath());
                 }
-                aqbitig.gizehter.view.Login login = new aqbitig.gizehter.view.Login(internalFrame, mode, f);
+                aqbitig.gizehter.view.Password login = new aqbitig.gizehter.view.Password(internalFrame, mode, f);
                 internalFrame.getContentPane().removeAll();
                 internalFrame.add(login);
                 internalFrame.pack();

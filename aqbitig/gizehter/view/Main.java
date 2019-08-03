@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
 
     public aqbitig.gizehter.view.SplitPane splitPane;
 
-    private static int sizeX, sizeY, locationX, locationY = 0;
+    public static int sizeX, sizeY, locationX, locationY = 0;
 
     public Main() {
 
@@ -75,7 +75,6 @@ public class Main extends javax.swing.JFrame {
         this.menuBar = new aqbitig.gizehter.view.menu.MenuBar(this.myMenuBar);
         setJMenuBar(menuBar);
         menuBar.menu(false);
-
     }
 
     private void windowPosition() {
@@ -83,8 +82,8 @@ public class Main extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 
         /* SET SIZE */
-        sizeX = (int) (dim.width * 0.5);
-        sizeY = (int) (dim.height * 0.5);
+        sizeX = (int) (dim.width / 1.333333);
+        sizeY = (int) (dim.height / 1.33333);
         java.awt.Dimension size = new java.awt.Dimension(sizeX, sizeY);
         setMinimumSize(size);
         setSize(size);

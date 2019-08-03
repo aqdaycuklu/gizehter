@@ -7,8 +7,11 @@ package aqbitig.gizehter.view;
 
 import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.lib.basic.T;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
@@ -36,17 +39,24 @@ public class Image extends javax.swing.JPanel {
     MyAtomic node;
     byte[] image;
 
+    JButton hold;
+
     /**
      * Creates new form Image
      */
-    public Image() {
+    public Image(JButton jButton) {
+        this.hold = jButton;
         initComponents();
     }
 
     private void initComponents() {
 
+        setLayout(new BorderLayout());
+
         jLabel1 = new javax.swing.JLabel();
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sunw05.jpg")));
+        jLabel1.setHorizontalAlignment(JLabel.CENTER);
+        jLabel1.setVerticalAlignment(JLabel.CENTER);
+        jLabel1.setText("Drop image here");
         jLabel1.setDropTarget(new DropTarget() {
             public synchronized void drop(DropTargetDropEvent evt) {
                 try {
@@ -64,19 +74,28 @@ public class Image extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setMinimumSize(new Dimension(50, 30));
         jLabel1.setBorder(BorderFactory.createLineBorder(Color.BLUE, 5));
-        add(jLabel1);
+        add(jLabel1, BorderLayout.CENTER);
 
         javax.swing.JButton jButton = new JButton();
 
         jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLabel1.setIcon(null);
+                node.setImage(null);
+                hold.setForeground(java.awt.Color.RED);
+
             }
         });
-        jButton.setText("remove");
-        add(jButton);
+        jButton.setText("Remove image");
+        add(jButton, BorderLayout.PAGE_END);
 
+    }
+
+    public void clear() {
+        jLabel1.setIcon(null);
+        jLabel1.setText("Drop icon here...");
     }
 
     public void save() {
@@ -89,8 +108,12 @@ public class Image extends javax.swing.JPanel {
 
     public void setNode(MyAtomic node) {
         this.node = node;
-        jLabel1.setIcon(new javax.swing.ImageIcon(this.node.getImage()));
-
+        if (this.node.getImage() == null) {
+            clear();
+        } else {
+            jLabel1.setIcon(new javax.swing.ImageIcon(this.node.getImage()));
+            jLabel1.setText(null);
+        }
     }
 
     private javax.swing.JLabel jLabel1;

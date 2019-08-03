@@ -93,8 +93,12 @@ public class C {
 
     public static String b64encode(byte[] bytes) {
         Base64.Encoder encoder = Base64.getUrlEncoder();
-        // Encoding URL  
-        return encoder.encodeToString(bytes);
+        // Encoding URL
+        if (bytes == null) {
+            return "";
+        } else {
+            return encoder.encodeToString(bytes);
+        }
     }
 
     public static byte[] b64decode(String str) {
