@@ -30,7 +30,7 @@ public class Info extends javax.swing.JPanel {
         this.jPasswordFieldPassword.setText(node.getPassword());
         this.jTextFieldUrl.setText(node.getUrl());
         this.jTextPaneComment.setText(node.getComment());
-        this.jLabel1.setText(node.getPath());
+        this.jLabel1.setText("id: " + node.getId() + " | path: " + node.getPath());
     }
 
     public void clear() {

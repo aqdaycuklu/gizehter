@@ -9,26 +9,26 @@ import aqbitig.gizehter.model.MyAtomic;
 import aqbitig.lib.basic.T;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.TransferHandler;
 
 /**
  *
@@ -94,6 +94,7 @@ public class Image extends javax.swing.JPanel {
     }
 
     public void clear() {
+        this.image = null;
         jLabel1.setIcon(null);
         jLabel1.setText("Drop icon here...");
     }
@@ -111,9 +112,20 @@ public class Image extends javax.swing.JPanel {
         if (this.node.getImage() == null) {
             clear();
         } else {
-            jLabel1.setIcon(new javax.swing.ImageIcon(this.node.getImage()));
+            this.image = node.getImage();
+            javax.swing.ImageIcon imageIcon = new ImageIcon(this.image);
+            jLabel1.setIcon(new ImageIcon(getScaledImage(imageIcon.getImage(), 250, 250)));
             jLabel1.setText(null);
         }
+    }
+
+    private java.awt.Image getScaledImage(java.awt.Image srcImg, int w, int h) {
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+        return resizedImg;
     }
 
     private javax.swing.JLabel jLabel1;
