@@ -1,11 +1,8 @@
 package aqbitig.gizehter.controller;
 
 import aqbitig.gizehter.model.MyAtomic;
-import aqbitig.gizehter.view.Main;
 import aqbitig.lib.basic.C;
 import aqbitig.lib.basic.T;
-import aqbitig.lib.db.AqbSqlite;
-import java.io.File;
 import java.util.List;
 import javax.swing.event.EventListenerList;
 import javax.swing.event.TreeModelEvent;
@@ -79,7 +76,7 @@ public class MyTreeModel implements TreeModel {
 
     /* class attributes. */
 
- /* override methods */
+    /* override methods */
     @Override
     public Object getRoot() {
         return root;
@@ -160,7 +157,7 @@ public class MyTreeModel implements TreeModel {
 
     /* override methods. */
 
- /* methods */
+    /* methods */
     public void reload() {
         reload(root);
     }
@@ -440,7 +437,7 @@ public class MyTreeModel implements TreeModel {
      */
     public DefaultMutableTreeNode addLeaf(TreePath parentPath) {
         DefaultMutableTreeNode parentNode;
-        MyAtomic myAtomic = new MyAtomic("project", "login", "password", "url", "comment", null);
+        //MyAtomic myAtomic = new MyAtomic("project", "login", "password", "url", "comment", null);
 
         if (parentPath == null) {
             parentNode = root;

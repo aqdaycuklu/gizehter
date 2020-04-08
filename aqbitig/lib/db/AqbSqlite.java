@@ -133,6 +133,7 @@ public class AqbSqlite {
 
             while (rs.next()) {
                 MyAtomic myAtomic = new MyAtomic(
+                        rs.getInt("id"),
                         rs.getString("path"),
                         C.decrypt(this.password, rs.getString("login")),
                         C.decrypt(this.password, rs.getString("password")),

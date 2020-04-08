@@ -8,6 +8,7 @@ package aqbitig.gizehter.model;
 public class MyAtomic {
 
     // ATOMIC DATA
+    private int id;
     private String path, login, password, url, comment;
     private byte[] image;
     
@@ -29,6 +30,7 @@ public class MyAtomic {
     }
 
     public MyAtomic(String name) {
+        this.id = 0;
         this.path = name;
         this.login = "";
         this.password = "";
@@ -37,7 +39,8 @@ public class MyAtomic {
         this.image = null;
     }
 
-    public MyAtomic(String path, String login, String password, String url, String comment, byte[] image) {
+    public MyAtomic(int id, String path, String login, String password, String url, String comment, byte[] image) {
+        this.id = id;
         this.path = path;
         this.login = login;
         this.password = password;
@@ -52,6 +55,14 @@ public class MyAtomic {
 
     public void setLeaf(boolean leaf) {
         this.leaf = leaf;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPath() {
@@ -128,7 +139,6 @@ public class MyAtomic {
 
     @Override
     public String toString() {
-
         return this.path.substring(this.path.lastIndexOf(MyAtomic.NODE_SEPARATOR) + 1);
     }
 

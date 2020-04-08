@@ -1,8 +1,10 @@
 package aqbitig.gizehter.view;
 
+import aqbitig.gizehter.controller.MyDefaultTreeCellRenderer;
 import aqbitig.gizehter.controller.MyTransferHandler;
 import aqbitig.gizehter.controller.MyTreeModel;
 import aqbitig.gizehter.controller.MyTreeModelListener;
+import java.awt.Color;
 
 /**
  * gizehter = giz(li) + anahtar
@@ -37,10 +39,19 @@ public class Tree extends javax.swing.JTree {
         //     myTreeModel.populateTree();
         // }
 
+        // SET NODE TEXT COLOR
+        setCellRenderer(new MyDefaultTreeCellRenderer());
+        
+        // SET MOUSE EVENT: DRAG AND DROP
         setDragEnabled(true);
         setDropMode(javax.swing.DropMode.ON_OR_INSERT);
+        
+        // SET NODED CAN BE EDIT
         setEditable(true);
+        
+        // SET TREE MODEL
         setModel(myTreeModel);
+        
         getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         setShowsRootHandles(true);
         setTransferHandler(new MyTransferHandler());
